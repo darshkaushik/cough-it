@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "40529690418",
+    "project_id": "cough-it",
+    "storage_bucket": "cough-it.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:40529690418:android:b8109a56e87574c50ae12b",
+        "android_client_info": {
+          "package_name": "com.ibmhack2021.coughit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "40529690418-va6i9qchl20q9emhcq6k2mc7ncfoa6f7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBC_xEl5Lqs6gp1OzWf98hfA-ciQWxqFM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "40529690418-va6i9qchl20q9emhcq6k2mc7ncfoa6f7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

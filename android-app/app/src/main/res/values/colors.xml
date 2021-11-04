@@ -16,7 +16,8 @@
     <color name="orange_surface">#FFEED6</color>
 
     <!--    Text colors -->
-    <color name="heading_text_color">#DEDEDE</color>
-    <color name="subtitle_text_color">#F0F0F0</color>
-    <color name="body_text_color">#BEBEBE</color>
+    <color name="heading_text_color">#303030</color>
+    <color name="subtitle_text_color">#333333</color>
+    <color name="body_text_color">#505050</color>
+    <color name="button_color">#FFEFD5</color>
 </resources>

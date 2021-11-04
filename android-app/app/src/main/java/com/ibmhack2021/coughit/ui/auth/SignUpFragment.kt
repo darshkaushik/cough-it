@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.android.material.transition.MaterialElevationScale
 import com.ibmhack2021.coughit.R
+import com.ibmhack2021.coughit.databinding.FragmentSignUpBinding
 
 
 private const val ARG_PARAM1 = "param1"
@@ -16,6 +18,9 @@ class SignUpFragment : Fragment() {
 
     private var param1: String? = null
     private var param2: String? = null
+
+    private var _binding: FragmentSignUpBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +35,15 @@ class SignUpFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sign_up, container, false)
+        _binding = FragmentSignUpBinding.inflate(inflater, container, false)
+        // transitions
+        enterTransition = MaterialElevationScale(true)
+        exitTransition = MaterialElevationScale(false)
+
+        // code to sign up
+
+
+        return binding.root
     }
 
     companion object {
