@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="orange_primary">#DE7D0C</color>
+    <color name="orange_muted">#B76E00</color>
+    <color name="orange_light">#482B00</color>
+    <color name="orange_surface">#442801</color>
+
+<!--    Text colors -->
+    <color name="heading_text_color">#303030</color>
+    <color name="subtitle_text_color">#333333</color>
+    <color name="body_text_color">#505050</color>
+</resources>

@@ -7,4 +7,16 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    
+<!--    The primary color palatte for the app-->
+    
+    <color name="orange_primary">#FFA826</color>
+    <color name="orange_muted">#FCC066</color>
+    <color name="orange_light">#FFD89E</color>
+    <color name="orange_surface">#FFEED6</color>
+
+    <!--    Text colors -->
+    <color name="heading_text_color">#DEDEDE</color>
+    <color name="subtitle_text_color">#F0F0F0</color>
+    <color name="body_text_color">#BEBEBE</color>
 </resources>
