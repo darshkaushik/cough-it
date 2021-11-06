@@ -5,10 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.google.android.material.transition.MaterialElevationScale
 import com.ibmhack2021.coughit.R
 import com.ibmhack2021.coughit.databinding.FragmentHomeBinding
 import com.ibmhack2021.coughit.databinding.FragmentSplashBinding
+import com.jjoe64.graphview.GridLabelRenderer
+import com.jjoe64.graphview.series.DataPoint
+import com.jjoe64.graphview.series.LineGraphSeries
 
 
 private const val ARG_PARAM1 = "param1"
@@ -43,6 +47,43 @@ class HomeFragment : Fragment() {
 
 
         handleFABOnScroll()
+
+        // put some points
+        val series = LineGraphSeries(
+            arrayOf<DataPoint>(
+                DataPoint((0).toDouble(),(1).toDouble()),
+                DataPoint((1).toDouble(),(5).toDouble()),
+                DataPoint((2).toDouble(),(3).toDouble()),
+                DataPoint((3).toDouble(),(2).toDouble()),
+                DataPoint((4).toDouble(),(6).toDouble())
+            )
+        )
+
+        series.dataPointsRadius = 10f
+        series.setAnimated(true)
+        series.isDrawDataPoints = true
+        series.title = "Covid Prediction Summary"
+        series.color = requireContext().getColor(R.color.orange_primary)
+        
+        series.setOnDataPointTapListener {
+                series, dataPoint ->
+            Toast.makeText(
+                requireContext(),
+                "DataPoint: " + dataPoint.x + "," + dataPoint.y,
+                Toast.LENGTH_SHORT
+            ).show()
+
+        }
+
+        binding.run {
+            val gridLabelRenderer = graphView.gridLabelRenderer
+            gridLabelRenderer.gridColor = requireContext().getColor(R.color.body_text_color)
+            gridLabelRenderer.gridStyle = GridLabelRenderer.GridStyle.HORIZONTAL
+            gridLabelRenderer.isVerticalLabelsVisible = false
+            gridLabelRenderer.isHighlightZeroLines = false
+
+            graphView.addSeries(series)
+        }
 
 
 

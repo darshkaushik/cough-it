@@ -82,10 +82,10 @@
                 android:background="@color/orange_surface"
                 android:backgroundTint="@color/surface_color">
 
-                <View
+                <com.jjoe64.graphview.GraphView
                     android:id="@+id/graph_view"
                     android:layout_width="match_parent"
-                    android:layout_height="250dp"
+                    android:layout_height="300dp"
                     android:layout_marginEnd="24dp"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="50dp"
