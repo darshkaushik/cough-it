@@ -14,10 +14,12 @@
     <color name="orange_muted">#FCC066</color>
     <color name="orange_light">#FFD89E</color>
     <color name="orange_surface">#FFEED6</color>
+    <color name="surface_color">#FDF4F2</color>
 
     <!--    Text colors -->
     <color name="heading_text_color">#303030</color>
     <color name="subtitle_text_color">#333333</color>
     <color name="body_text_color">#505050</color>
-    <color name="button_color">#FFEFD5</color>
+    <color name="button_color">#FFF8F3</color>
+    <color name="elevated_surfaces">#FFFFFF</color>
 </resources>

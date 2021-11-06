@@ -5,9 +5,12 @@
     <color name="orange_light">#482B00</color>
     <color name="orange_surface">#442801</color>
 
+    <color name="surface_color">#1B1B1B</color>
+
     <!--    Text colors -->
     <color name="heading_text_color">#DEDEDE</color>
     <color name="subtitle_text_color">#F0F0F0</color>
     <color name="body_text_color">#BEBEBE</color>
     <color name="button_color">#4C4740</color>
+    <color name="elevated_surfaces">#474747</color>
 </resources>
