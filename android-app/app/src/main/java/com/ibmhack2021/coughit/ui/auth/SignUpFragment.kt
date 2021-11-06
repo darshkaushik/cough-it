@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -143,6 +144,8 @@ class SignUpFragment : Fragment() {
                             + "\n Email ID: " + user?.email
                             +  "\n Phone No. " + user?.phoneNumber
                             + "\n Photo URL: " + user?.photoUrl)
+
+                    findNavController().navigate(R.id.action_signUpFragment_to_homeFragment)
 
 
                 } else {

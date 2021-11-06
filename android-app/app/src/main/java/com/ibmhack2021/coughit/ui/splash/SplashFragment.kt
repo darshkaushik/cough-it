@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import com.google.android.material.transition.MaterialElevationScale
+import com.google.firebase.auth.FirebaseAuth
 import com.ibmhack2021.coughit.R
 import com.ibmhack2021.coughit.databinding.FragmentSplashBinding
 
@@ -25,12 +26,16 @@ class SplashFragment : Fragment() {
     private var _binding: FragmentSplashBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var mAuth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
+        mAuth = FirebaseAuth.getInstance()
     }
 
     override fun onCreateView(
@@ -45,11 +50,22 @@ class SplashFragment : Fragment() {
         // here I have to call firebase and then verify if the user has signed in
         // if the user has signed in already then move to home fragment directlly
         // todo : add firebase logic here
+        val currentUser = mAuth.currentUser
 
-        // move to next screen
-        Handler(Looper.getMainLooper()).postDelayed({
-            binding.root.findNavController().navigate(R.id.action_splashFragment_to_signUpFragment)
-        }, 600)
+        if(currentUser != null){
+            // move to next screen
+            Handler(Looper.getMainLooper()).postDelayed({
+                binding.root.findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
+            }, 600)
+        }else{
+            // move to next screen
+            Handler(Looper.getMainLooper()).postDelayed({
+                binding.root.findNavController().navigate(R.id.action_splashFragment_to_signUpFragment)
+            }, 600)
+        }
+
+
+
 
 
 
