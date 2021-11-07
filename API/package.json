@@ -4,23 +4,28 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "node local-dev.js",
-    "dev": "nodemon local-dev.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "dependencies": {
+    "@sendgrid/mail": "^7.6.0",
     "aws-sdk": "^2.1004.0",
     "aws-serverless-express": "^3.4.0",
     "axios": "^0.22.0",
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "crypto-js": "^4.1.1",
     "express": "^4.17.1",
     "ffmpeg": "^0.0.4",
+    "jsonwebtoken": "^8.5.1",
     "lambda-warmer": "^1.2.2",
+    "mongoose": "^6.0.12",
     "morgan": "^1.10.0",
     "mp3-to-wav": "^0.1.11",
     "python-shell": "^3.0.1",
     "sagemaker": "^0.0.3",
-    "shelljs": "^0.8.4"
+    "shelljs": "^0.8.4",
+    "validator": "^13.7.0"
   },
   "devDependencies": {
     "serverless": "^2.62.0",
