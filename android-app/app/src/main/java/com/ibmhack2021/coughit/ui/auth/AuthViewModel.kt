@@ -7,5 +7,5 @@ import com.google.firebase.auth.FirebaseAuth
 import com.ibmhack2021.coughit.repository.Repository
 
 
-class AuthViewModel() : ViewModel() {
+class AuthViewModel(val repository: Repository) : ViewModel() {
 }

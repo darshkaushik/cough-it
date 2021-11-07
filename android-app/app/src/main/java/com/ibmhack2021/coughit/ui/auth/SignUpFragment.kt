@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -19,6 +20,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.ibmhack2021.coughit.R
 import com.ibmhack2021.coughit.databinding.FragmentSignUpBinding
+import com.ibmhack2021.coughit.repository.Repository
 import kotlin.math.sign
 
 
@@ -37,6 +39,9 @@ class SignUpFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
 
+    // view mode
+    lateinit var authViewModel: AuthViewModel
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,6 +53,12 @@ class SignUpFragment : Fragment() {
 
         // init the firebase auth
         auth = Firebase.auth
+
+        // init the repository & view model
+        val repository = Repository(requireContext())
+        val authViewModelProviderFactory = AuthViewModelProviderFactory(repository)
+        authViewModel = ViewModelProvider(this, authViewModelProviderFactory)
+            .get(AuthViewModel::class.java)
 
     }
 
