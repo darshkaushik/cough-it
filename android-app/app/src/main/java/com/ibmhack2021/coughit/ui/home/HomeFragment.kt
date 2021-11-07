@@ -6,10 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.transition.MaterialElevationScale
 import com.ibmhack2021.coughit.R
 import com.ibmhack2021.coughit.databinding.FragmentHomeBinding
 import com.ibmhack2021.coughit.databinding.FragmentSplashBinding
+import com.ibmhack2021.coughit.repository.Repository
 import com.jjoe64.graphview.GridLabelRenderer
 import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.LineGraphSeries
@@ -27,12 +29,21 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
+    // view model
+    lateinit var homeViewModel: HomeViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
+        // init the repository
+        val repository = Repository(requireContext())
+        val homeViewModelProviderFactory = HomeViewModelProviderFactory(repository);
+        homeViewModel = ViewModelProvider(this, homeViewModelProviderFactory)
+            .get(HomeViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -115,5 +126,10 @@ class HomeFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
