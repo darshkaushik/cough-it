@@ -1,14 +1,177 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.home.HomeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        android:backgroundTint="@color/surface_color">
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            style="?attr/collapsingToolbarLayoutMediumStyle"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/collapsingToolbarLayoutMediumSize"
+            app:title="Home"
+            app:titleCollapseMode="fade"
+            app:collapsedTitleTextAppearance="@style/TitleTextAppearanceCollapsed"
+            app:expandedTitleTextAppearance="@style/TitleTextAppearance"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+            <com.google.android.material.appbar.MaterialToolbar
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                app:layout_collapseMode="pin"
+                android:background="@color/surface_color"
+                android:backgroundTint="@color/surface_color"
+                android:elevation="0dp">
 
-</FrameLayout>
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/account_icon"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    app:srcCompat="@color/white"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="12dp"/>
+
+            </com.google.android.material.appbar.MaterialToolbar>
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                app:trackThickness="2dp"
+                android:indeterminate="true" />
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/test_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Test"
+        android:fontFamily="@font/poppins_medium"
+        app:iconTint="@color/orange_primary"
+        android:textColor="@color/orange_primary"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="24dp"
+        app:backgroundTint="@color/button_color"
+        app:icon="@drawable/ic_test_tube"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nested_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        app:layout_anchor="@id/app_bar"
+        app:layout_anchorGravity="bottom">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/orange_surface"
+                android:backgroundTint="@color/surface_color">
+
+                <com.jjoe64.graphview.GraphView
+                    android:id="@+id/graph_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="50dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.5"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/past_tests"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Past Tests"
+                    android:paddingTop="14dp"
+                    android:paddingBottom="14dp"
+                    app:cornerRadius="16dp"
+                    app:elevation="0dp"
+                    android:textColor="@color/orange_primary"
+                    style="@style/Widget.Material3.Button.UnelevatedButton"
+                    app:backgroundTint="@color/elevated_surfaces"
+                    android:fontFamily="@font/poppins_medium"
+                    app:layout_constraintTop_toBottomOf="@id/graph_view"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/guideline_1"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/contribution"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Contributions"
+                    android:paddingTop="14dp"
+                    android:paddingBottom="14dp"
+                    app:cornerRadius="16dp"
+                    android:textColor="@color/orange_primary"
+                    style="@style/Widget.Material3.Button.UnelevatedButton"
+                    app:backgroundTint="@color/elevated_surfaces"
+                    android:fontFamily="@font/poppins_medium"
+                    app:layout_constraintTop_toBottomOf="@id/graph_view"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/guideline_1"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/recent_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Recent Test"
+                    app:layout_constraintTop_toBottomOf="@id/past_tests"
+                    android:layout_marginStart="12dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="@id/past_tests"
+                    android:layout_marginTop="24dp"/>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="600dp"
+                    android:backgroundTint="@color/elevated_surfaces"
+                    app:layout_constraintTop_toBottomOf="@id/recent_text"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    app:cardCornerRadius="24dp"
+                    android:layout_marginBottom="50dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/past_tests"
+                    app:layout_constraintEnd_toEndOf="@id/past_tests"
+                    android:layout_marginTop="12dp"
+                    style="?attr/materialCardViewFilledStyle"/>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

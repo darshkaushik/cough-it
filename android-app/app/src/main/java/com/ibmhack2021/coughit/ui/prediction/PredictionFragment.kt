@@ -5,7 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.transition.MaterialFadeThrough
 import com.ibmhack2021.coughit.R
+import com.ibmhack2021.coughit.databinding.FragmentPredictionBinding
+import com.ibmhack2021.coughit.repository.Repository
 
 
 private const val ARG_PARAM1 = "param1"
@@ -17,12 +21,23 @@ class PredictionFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    lateinit var predictViewModel: PredictViewModel
+
+    // binding
+    private var _binding : FragmentPredictionBinding? = null
+    private val binding get() = _binding!!
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
+        val repository = Repository(requireContext())
+        val predictViewModelProviderFactory = PredictViewModelProviderFactory(repository)
+        predictViewModel = ViewModelProvider(this, predictViewModelProviderFactory)
+            .get(PredictViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -30,7 +45,13 @@ class PredictionFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_prediction, container, false)
+        _binding = FragmentPredictionBinding.inflate(inflater, container, false)
+
+        exitTransition = MaterialFadeThrough()
+        enterTransition = MaterialFadeThrough()
+
+
+        return binding.root
     }
 
     companion object {
@@ -43,5 +64,10 @@ class PredictionFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
