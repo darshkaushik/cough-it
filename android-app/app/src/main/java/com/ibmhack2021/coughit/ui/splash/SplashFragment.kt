@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import com.google.android.material.transition.MaterialElevationScale
+import com.google.android.material.transition.MaterialFadeThrough
 import com.google.firebase.auth.FirebaseAuth
 import com.ibmhack2021.coughit.R
 import com.ibmhack2021.coughit.databinding.FragmentSplashBinding
@@ -45,7 +46,7 @@ class SplashFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentSplashBinding.inflate(inflater, container, false)
         // your code goes here
-        exitTransition = MaterialElevationScale(true)
+        exitTransition = MaterialFadeThrough()
 
         // here I have to call firebase and then verify if the user has signed in
         // if the user has signed in already then move to home fragment directlly

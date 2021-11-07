@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.transition.MaterialFadeThrough
 import com.ibmhack2021.coughit.databinding.FragmentPastTestsBinding
 import com.ibmhack2021.coughit.databinding.FragmentRecordBinding
 import com.ibmhack2021.coughit.repository.Repository
@@ -46,6 +47,9 @@ class PastTestsFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentPastTestsBinding.inflate(inflater, container, false)
+
+        exitTransition = MaterialFadeThrough()
+        enterTransition = MaterialFadeThrough()
 
 
 

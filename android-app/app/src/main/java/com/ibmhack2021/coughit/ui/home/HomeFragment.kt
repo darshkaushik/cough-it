@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.transition.MaterialElevationScale
+import com.google.android.material.transition.MaterialFadeThrough
 import com.ibmhack2021.coughit.R
 import com.ibmhack2021.coughit.databinding.FragmentHomeBinding
 import com.ibmhack2021.coughit.databinding.FragmentSplashBinding
@@ -53,8 +55,8 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        exitTransition = MaterialElevationScale(true)
-        enterTransition = MaterialElevationScale(true)
+        exitTransition = MaterialFadeThrough()
+        enterTransition = MaterialFadeThrough()
 
 
         handleFABOnScroll()
@@ -94,6 +96,17 @@ class HomeFragment : Fragment() {
             gridLabelRenderer.isHighlightZeroLines = false
 
             graphView.addSeries(series)
+
+
+            // test button
+            testFab.setOnClickListener {
+                findNavController().navigate(R.id.action_homeFragment_to_recordFragment)
+            }
+
+            // past tests fragment
+            pastTests.setOnClickListener {
+                findNavController().navigate(R.id.action_homeFragment_to_pastTestsFragment)
+            }
         }
 
 

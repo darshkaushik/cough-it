@@ -39,6 +39,9 @@
         <action
             android:id="@+id/action_homeFragment_to_recordFragment"
             app:destination="@id/recordFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_pastTestsFragment"
+            app:destination="@id/pastTestsFragment" />
     </fragment>
     <fragment
         android:id="@+id/recordFragment"
@@ -59,5 +62,13 @@
             app:destination="@id/homeFragment"
             app:popUpTo="@id/predictionFragment"
             app:popUpToInclusive="true" />
+        <argument
+            android:name="encodedString"
+            app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/pastTestsFragment"
+        android:name="com.ibmhack2021.coughit.ui.pasttests.PastTestsFragment"
+        android:label="fragment_past_tests"
+        tools:layout="@layout/fragment_past_tests" />
 </navigation>

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.transition.MaterialFadeThrough
 import com.ibmhack2021.coughit.R
 import com.ibmhack2021.coughit.databinding.FragmentPredictionBinding
 import com.ibmhack2021.coughit.repository.Repository
@@ -45,6 +46,9 @@ class PredictionFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentPredictionBinding.inflate(inflater, container, false)
+
+        exitTransition = MaterialFadeThrough()
+        enterTransition = MaterialFadeThrough()
 
 
         return binding.root
