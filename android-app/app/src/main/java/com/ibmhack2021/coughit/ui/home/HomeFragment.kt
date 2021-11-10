@@ -62,15 +62,19 @@ class HomeFragment : Fragment() {
         handleFABOnScroll()
 
         // put some points
-        val series = LineGraphSeries(
-            arrayOf<DataPoint>(
-                DataPoint((0).toDouble(),(1).toDouble()),
-                DataPoint((1).toDouble(),(5).toDouble()),
-                DataPoint((2).toDouble(),(3).toDouble()),
-                DataPoint((3).toDouble(),(2).toDouble()),
-                DataPoint((4).toDouble(),(6).toDouble())
-            )
-        )
+//        val series = LineGraphSeries(
+//            arrayOf<DataPoint>(
+//                DataPoint((0).toDouble(),(1).toDouble()),
+//                DataPoint((1).toDouble(),(5).toDouble()),
+//                DataPoint((2).toDouble(),(3).toDouble()),
+//                DataPoint((3).toDouble(),(2).toDouble()),
+//                DataPoint((4).toDouble(),(6).toDouble())
+//            )
+//        )
+
+        val doubleArray = arrayOf<Double>(0.532, 0.459, 0.356, 0.987, 0.234)
+
+        val series = homeViewModel.convertToLineGraphSeries(doubleArray)
 
         series.dataPointsRadius = 10f
         series.setAnimated(true)
@@ -94,6 +98,8 @@ class HomeFragment : Fragment() {
             gridLabelRenderer.gridStyle = GridLabelRenderer.GridStyle.HORIZONTAL
             gridLabelRenderer.isVerticalLabelsVisible = false
             gridLabelRenderer.isHighlightZeroLines = false
+
+            // todo : call observer here and just get the series
 
             graphView.addSeries(series)
 
