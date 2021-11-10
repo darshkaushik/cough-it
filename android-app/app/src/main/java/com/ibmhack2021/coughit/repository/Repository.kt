@@ -69,8 +69,6 @@ class Repository(context: Context) {
             e.printStackTrace()
         }
 
-
-
         return filename as String
     }
 
@@ -85,6 +83,14 @@ class Repository(context: Context) {
         }
 
         mediaRecorder = null
+    }
+
+    // function to get the max amplitude
+    fun getMaxAmplitude(): Int?{
+        if(state){
+            return mediaRecorder?.maxAmplitude
+        }
+        return null
     }
 
     // get the file from the location and convert that into base64 string

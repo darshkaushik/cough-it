@@ -14,6 +14,7 @@ import com.ibmhack2021.coughit.databinding.FragmentHomeBinding
 import com.ibmhack2021.coughit.databinding.FragmentRecordBinding
 import com.ibmhack2021.coughit.repository.Repository
 import com.ibmhack2021.coughit.util.RecordingState
+import java.util.*
 
 
 private const val ARG_PARAM1 = "param1"
@@ -63,7 +64,8 @@ class RecordFragment : Fragment() {
             // start the timer on button click
             playButton.setOnClickListener {
                 state = true
-                recordViewModel.startCountdown(playButton, requireContext(), state)
+                recordViewModel.startCountdown(playButton, requireContext(), state, audioRecordView)
+                recordViewModel.updateVisualiser(audioRecordView)
                 playButton.isEnabled = false
             }
 
