@@ -1,12 +1,15 @@
 package com.ibmhack2021.coughit.ui.home
 
+import android.Manifest
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.transition.MaterialElevationScale
 import com.google.android.material.transition.MaterialFadeThrough
@@ -17,19 +20,28 @@ import com.ibmhack2021.coughit.repository.Repository
 import com.jjoe64.graphview.GridLabelRenderer
 import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.LineGraphSeries
+import com.vmadalin.easypermissions.EasyPermissions
+import com.vmadalin.easypermissions.dialogs.SettingsDialog
 
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
     private var param1: String? = null
     private var param2: String? = null
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+
+    // take permissions for recording audio and read write storage
+    private val permissions =
+        arrayOf(
+            Manifest.permission.RECORD_AUDIO,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+        )
 
     // view model
     lateinit var homeViewModel: HomeViewModel
@@ -106,7 +118,12 @@ class HomeFragment : Fragment() {
 
             // test button
             testFab.setOnClickListener {
-                findNavController().navigate(R.id.action_homeFragment_to_recordFragment)
+                if(homeViewModel.handlePermissions(requireContext(), permissions)){
+                    binding.root.findNavController().navigate(R.id.action_homeFragment_to_recordFragment)
+                }else{
+                    homeViewModel.requestPermissions(PERMISSION_REQUEST_CODE, permissions, this@HomeFragment)
+                }
+
             }
 
             // past tests fragment
@@ -137,6 +154,8 @@ class HomeFragment : Fragment() {
 
     companion object {
 
+        const val PERMISSION_REQUEST_CODE = 1
+
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             HomeFragment().apply {
@@ -147,8 +166,37 @@ class HomeFragment : Fragment() {
             }
     }
 
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
+    override fun onPermissionsDenied(requestCode: Int, perms: List<String>) {
+        if(EasyPermissions.somePermissionDenied(this, perms.first())){
+            SettingsDialog.Builder(requireActivity()).build().show()
+        }else{
+            // homeViewModel.requestPermissions(PERMISSION_REQUEST_CODE, permissions, this)
+        }
+    }
+
+    override fun onPermissionsGranted(requestCode: Int, perms: List<String>) {
+        Toast.makeText(
+            requireContext(),
+            "Permissions Granted",
+            Toast.LENGTH_SHORT
+        ).show()
+    }
+
+
+
+
 }

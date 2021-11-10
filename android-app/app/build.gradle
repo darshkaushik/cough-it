@@ -104,4 +104,7 @@ dependencies {
     // graph view for android
     implementation 'com.jjoe64:graphview:4.2.2'
 
+    // audio visualizer
+    implementation 'com.github.Armen101:AudioRecordView:1.0.5'
+
 }
