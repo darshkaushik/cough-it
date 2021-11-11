@@ -45,7 +45,10 @@ exports.loginUser = asyncHandler(async (req, res) => {
             throw err;
           }
           console.log("insert successful");
-          return res.send("User Created successfully");
+          return res.status(200).json({
+            status: "success",
+            data: req.body,
+          });
         });
       }
     }
