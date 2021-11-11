@@ -5,6 +5,7 @@ import android.os.CountDownTimer
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -64,6 +65,14 @@ class RecordViewModel(val repository: Repository) : ViewModel() {
             }
         }.start()
 
+    }
+
+    fun deleteRecording(context: Context) = viewModelScope.launch {
+        if(repository.deleteRecording(context)){
+            Toast.makeText(context, "Recording Deleted", Toast.LENGTH_SHORT).show()
+        }else{
+            Toast.makeText(context, "Please try again", Toast.LENGTH_SHORT).show()
+        }
     }
 
     // function to run the visualiser

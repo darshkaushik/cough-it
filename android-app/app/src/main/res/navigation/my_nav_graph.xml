@@ -50,7 +50,9 @@
         tools:layout="@layout/fragment_record" >
         <action
             android:id="@+id/action_recordFragment_to_predictionFragment"
-            app:destination="@id/predictionFragment" />
+            app:destination="@id/predictionFragment"
+            app:launchSingleTop="false"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/predictionFragment"
@@ -60,7 +62,7 @@
         <action
             android:id="@+id/action_predictionFragment_to_homeFragment"
             app:destination="@id/homeFragment"
-            app:popUpTo="@id/predictionFragment"
+            app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="true" />
         <argument
             android:name="encodedString"

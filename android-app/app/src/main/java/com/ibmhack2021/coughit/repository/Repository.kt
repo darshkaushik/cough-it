@@ -68,7 +68,7 @@ class Repository(context: Context) {
             mediaRecorder!!.prepare()
             mediaRecorder!!.start()
             state = true
-            Toast.makeText(context, "Recording started !", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(context, "Recording started !", Toast.LENGTH_SHORT).show()
         }catch (e : IllegalStateException){
             e.printStackTrace()
         }catch (e: IOException){
@@ -89,6 +89,10 @@ class Repository(context: Context) {
         }
 
         mediaRecorder = null
+    }
+
+    fun deleteRecording(context: Context) : Boolean{
+        return File(filename).delete()
     }
 
     // function to get the max amplitude
