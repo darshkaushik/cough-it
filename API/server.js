@@ -7,7 +7,7 @@ const http = require("http");
 const DB_URI = process.env.DATABASE_URI;
 
 mongoose.connect(DB_URI).then((con) => {
-  console.log(`Successfully connected to ${process.env.NODE_ENV} DB`);
+  console.log(`Successfully connected to DB`);
 });
 
 //set port, listen for requests
