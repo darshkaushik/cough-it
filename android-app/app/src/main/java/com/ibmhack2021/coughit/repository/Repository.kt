@@ -6,6 +6,7 @@ import android.os.Build
 import android.util.Log
 import android.widget.Toast
 import com.ibmhack2021.coughit.api.RetrofitInstance
+import com.ibmhack2021.coughit.model.login.request.LoginRequest
 import com.ibmhack2021.coughit.model.prediction.request.PredictionRequest
 import java.io.File
 import java.io.IOException
@@ -21,6 +22,10 @@ class Repository(context: Context) {
     // prediction API
     suspend fun getPrediction(predictionRequest: PredictionRequest) =
         RetrofitInstance.api.getPrediction(predictionRequest = predictionRequest)
+
+    // login or create user API
+    suspend fun loginToServer(loginRequest: LoginRequest) =
+        RetrofitInstance.api.loginToServer(loginRequest = loginRequest)
 
 
 
