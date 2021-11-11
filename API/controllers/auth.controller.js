@@ -2,9 +2,49 @@ const User = require("../models/user.model");
 const Otp = require("../models/otp.model");
 const bcrypt = require("bcryptjs");
 const { promisify } = require("util");
-const sendEmail = require("../helpers/sendEmail");
-const generateOtp = require("../helpers/generateOtp");
 const asyncHandler = require("../helpers/async");
+
+const Cloudant = require("@cloudant/cloudant");
+
+const cloudant = new Cloudant({
+  url: "https://19bfb4e7-9436-46dc-9482-9c23c5a73963-bluemix.cloudantnosqldb.appdomain.cloud",
+  plugins: {
+    iamauth: { iamApiKey: "sOGe8NNT3MCHJablwqsaslgwZXWOs6mDAYCCz09lOOKs" },
+  },
+});
+
+let db;
+
+db = cloudant.use("coughit");
+
+exports.loginUser = asyncHandler(async (req, res) => {
+  // db.find({ selector: { email: req.body.email } }, function (err, existingdoc) {
+  //   console.log(existingdoc.docs[0]);
+  //   if (
+  //     existingdoc &&
+  //     existingdoc.docs[0] &&
+  //     existingdoc.docs[0].email === req.body.email
+  //   ) {
+  //     return res.send("Already present");
+  //   } else {
+  //     const ddoc = {
+  //       _id: "users",
+  //       email: req.body.email,
+  //     };
+  //     db.insert(ddoc, function (err, result) {
+  //       if (err) {
+  //         throw err;
+  //       }
+  //       console.log("insert successful");
+  //     });
+  //     return res.send("User Created successfully");
+  //   }
+  // });
+  return res.status(200).json({
+    status: "success",
+    data: req.body,
+  });
+});
 
 const jwt = require("jsonwebtoken");
 
