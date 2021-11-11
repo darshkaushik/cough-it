@@ -3,6 +3,7 @@ const Otp = require("../models/otp.model");
 const bcrypt = require("bcryptjs");
 const { promisify } = require("util");
 const asyncHandler = require("../helpers/async");
+const { v4: uuidv4 } = require("uuid");
 
 const Cloudant = require("@cloudant/cloudant");
 
@@ -18,32 +19,37 @@ let db;
 db = cloudant.use("coughit");
 
 exports.loginUser = asyncHandler(async (req, res) => {
-  // db.find({ selector: { email: req.body.email } }, function (err, existingdoc) {
-  //   console.log(existingdoc.docs[0]);
-  //   if (
-  //     existingdoc &&
-  //     existingdoc.docs[0] &&
-  //     existingdoc.docs[0].email === req.body.email
-  //   ) {
-  //     return res.send("Already present");
-  //   } else {
-  //     const ddoc = {
-  //       _id: "users",
-  //       email: req.body.email,
-  //     };
-  //     db.insert(ddoc, function (err, result) {
-  //       if (err) {
-  //         throw err;
-  //       }
-  //       console.log("insert successful");
-  //     });
-  //     return res.send("User Created successfully");
-  //   }
-  // });
-  return res.status(200).json({
-    status: "success",
-    data: req.body,
-  });
+  const { email, uid, profile_url } = req.body;
+  db.find(
+    { selector: { email: req.body.email, documentType: "users" } },
+    function (err, existingdoc) {
+      if (
+        existingdoc &&
+        existingdoc.docs[0] &&
+        existingdoc.docs[0].email === req.body.email
+      ) {
+        return res.status(200).json({
+          status: "success",
+          data: req.body,
+        });
+      } else {
+        const ddoc = {
+          _id: uuidv4(),
+          documentType: "users",
+          email,
+          uid,
+          profile_url,
+        };
+        db.insert(ddoc, function (err, result) {
+          if (err) {
+            throw err;
+          }
+          console.log("insert successful");
+          return res.send("User Created successfully");
+        });
+      }
+    }
+  );
 });
 
 const jwt = require("jsonwebtoken");

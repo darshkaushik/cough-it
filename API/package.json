@@ -23,6 +23,7 @@
     "mp3-to-wav": "^0.1.11",
     "python-shell": "^3.0.1",
     "shelljs": "^0.8.4",
+    "uuid": "^8.3.2",
     "xmlhttprequest": "^1.8.0"
   }
 }
