@@ -11,7 +11,7 @@ class RetrofitInstance {
 
         // base url
         // todo : change base url
-        const val BASE_URL = "https://www.dummy.com"
+        const val BASE_URL = "http://ec2-15-206-203-176.ap-south-1.compute.amazonaws.com:8080/api/"
 
         private val retrofit by lazy {
             val logging = HttpLoggingInterceptor()

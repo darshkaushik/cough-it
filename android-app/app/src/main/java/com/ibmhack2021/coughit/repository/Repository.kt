@@ -5,6 +5,8 @@ import android.media.MediaRecorder
 import android.os.Build
 import android.util.Log
 import android.widget.Toast
+import com.ibmhack2021.coughit.api.RetrofitInstance
+import com.ibmhack2021.coughit.model.prediction.request.PredictionRequest
 import java.io.File
 import java.io.IOException
 
@@ -15,6 +17,10 @@ class Repository(context: Context) {
     /**
      * All the below functions are for API calls
      */
+
+    // prediction API
+    suspend fun getPrediction(predictionRequest: PredictionRequest) =
+        RetrofitInstance.api.getPrediction(predictionRequest = predictionRequest)
 
 
 

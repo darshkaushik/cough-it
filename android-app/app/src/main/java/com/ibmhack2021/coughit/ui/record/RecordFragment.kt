@@ -1,6 +1,7 @@
 package com.ibmhack2021.coughit.ui.record
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -77,6 +78,7 @@ class RecordFragment : Fragment() {
             recordViewModel.flag.observe(viewLifecycleOwner, Observer {
                 if(RecordingState.STOP == it){
                     encodedString = recordViewModel.getAudioString()
+                    Log.d("Prediction", "Encoded String: " + encodedString)
                     val action = RecordFragmentDirections.
                     actionRecordFragmentToPredictionFragment(encodedString = encodedString!!)
                     findNavController().navigate(action)
