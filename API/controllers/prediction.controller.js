@@ -4,6 +4,51 @@ const { exec } = require("child_process");
 const axios = require("axios");
 const AWS = require("aws-sdk");
 const sampleData = require("../sample-request");
+const { v4: uuidv4 } = require("uuid");
+
+const Cloudant = require("@cloudant/cloudant");
+
+const cloudant = new Cloudant({
+  url: "https://19bfb4e7-9436-46dc-9482-9c23c5a73963-bluemix.cloudantnosqldb.appdomain.cloud",
+  plugins: {
+    iamauth: { iamApiKey: "sOGe8NNT3MCHJablwqsaslgwZXWOs6mDAYCCz09lOOKs" },
+  },
+});
+
+let db;
+
+db = cloudant.use("predictions");
+
+exports.getStats = async (req, res) => {
+  const email = req.params.email;
+  // const ddoc = {
+  //   _id: uuidv4(),
+  //   documentType: "predictions",
+  //   email: email,
+  //   prediction: prediction,
+  //   date: new Date(),
+  // };
+  // db.insert(ddoc, function (err, result) {
+  //   if (err) {
+  //     throw err;
+  //   }
+  //   console.log("insert successful");
+  //   return res.status(200).json({
+  //     status: "success",
+  //     data: ddoc,
+  //   });
+  // });
+
+  db.find(
+    { selector: { email, documentType: "predictions" } },
+    function (err, existingdoc) {
+      return res.status(200).json({
+        status: "success",
+        data: existingdoc.docs,
+      });
+    }
+  );
+};
 
 exports.getPrediction = async (req, res) => {
   try {
