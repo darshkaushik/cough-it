@@ -5,6 +5,9 @@ import android.media.MediaRecorder
 import android.os.Build
 import android.util.Log
 import android.widget.Toast
+import com.ibmhack2021.coughit.api.RetrofitInstance
+import com.ibmhack2021.coughit.model.login.request.LoginRequest
+import com.ibmhack2021.coughit.model.prediction.request.PredictionRequest
 import java.io.File
 import java.io.IOException
 
@@ -15,6 +18,14 @@ class Repository(context: Context) {
     /**
      * All the below functions are for API calls
      */
+
+    // prediction API
+    suspend fun getPrediction(predictionRequest: PredictionRequest) =
+        RetrofitInstance.api.getPrediction(predictionRequest = predictionRequest)
+
+    // login or create user API
+    suspend fun loginToServer(loginRequest: LoginRequest) =
+        RetrofitInstance.api.loginToServer(loginRequest = loginRequest)
 
 
 
@@ -62,7 +73,7 @@ class Repository(context: Context) {
             mediaRecorder!!.prepare()
             mediaRecorder!!.start()
             state = true
-            Toast.makeText(context, "Recording started !", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(context, "Recording started !", Toast.LENGTH_SHORT).show()
         }catch (e : IllegalStateException){
             e.printStackTrace()
         }catch (e: IOException){
@@ -83,6 +94,18 @@ class Repository(context: Context) {
         }
 
         mediaRecorder = null
+    }
+
+    fun deleteRecording(context: Context) : Boolean{
+        return File(filename).delete()
+    }
+
+    // function to get the max amplitude
+    fun getMaxAmplitude(): Int?{
+        if(state){
+            return mediaRecorder?.maxAmplitude
+        }
+        return null
     }
 
     // get the file from the location and convert that into base64 string

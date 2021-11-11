@@ -5,29 +5,37 @@ import android.os.CountDownTimer
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.android.material.button.MaterialButton
 import com.ibmhack2021.coughit.repository.Repository
 import com.ibmhack2021.coughit.util.RecordingState
+import com.visualizer.amplitude.AudioRecordView
 import kotlinx.coroutines.launch
+import java.util.*
 
 class RecordViewModel(val repository: Repository) : ViewModel() {
 
     val countdownValue : MutableLiveData<String> = MutableLiveData()
     val flag : MutableLiveData<RecordingState> = MutableLiveData(RecordingState.IDLE)
+    val currentMaxAmplitude: MutableLiveData<Int> = MutableLiveData()
 
     // filename for recording
     var filename: String? = null
     var encodedString: String? = null
+
+    // timer
+    private var timer: Timer? = null
 
 
     // countdown timer in view model
     fun startCountdown(
         materialButton: MaterialButton,
         context: Context,
-        state: Boolean
+        state: Boolean,
+        audioRecordView: AudioRecordView
     ) = viewModelScope.launch {
 
         // as soon as start countdown will run
@@ -41,6 +49,8 @@ class RecordViewModel(val repository: Repository) : ViewModel() {
             }
 
             override fun onFinish() {
+                timer?.cancel()
+                audioRecordView.recreate()
                 repository.stopRecording(context = context)
                 countdownValue.postValue("Time Out")
 
@@ -56,6 +66,30 @@ class RecordViewModel(val repository: Repository) : ViewModel() {
         }.start()
 
     }
+
+    fun deleteRecording(context: Context) = viewModelScope.launch {
+        if(repository.deleteRecording(context)){
+            Toast.makeText(context, "Recording Deleted", Toast.LENGTH_SHORT).show()
+        }else{
+            Toast.makeText(context, "Please try again", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    // function to run the visualiser
+    fun updateVisualiser(audioRecordView: AudioRecordView)
+        = viewModelScope.launch {
+        timer = Timer()
+        timer?.schedule(object : TimerTask(){
+            override fun run() {
+                val currentMaxAmplitude = repository.getMaxAmplitude()
+                audioRecordView.update(currentMaxAmplitude?:0)
+            }
+
+        },0,100)
+    }
+
+
+
 
     // encoded string
     fun getAudioString() : String?{

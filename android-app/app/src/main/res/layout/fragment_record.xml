@@ -3,8 +3,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/surface_color"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.record.RecordFragment">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="24dp"
+        app:cardBackgroundColor="@color/surface_color"
+        app:layout_constraintBottom_toTopOf="@id/play_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.88"
+        app:strokeColor="@color/orange_primary">
+
+        <com.visualizer.amplitude.AudioRecordView
+            android:id="@+id/audio_record_view"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            app:chunkAlignTo="center"
+            app:chunkColor="@color/orange_muted"
+            app:chunkRoundedCorners="true"
+            app:chunkSoftTransition="true"
+            app:chunkSpace="1dp"
+            app:chunkWidth="2dp"
+            app:direction="leftToRight"
+            app:layout_constraintBottom_toTopOf="@id/play_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.59000003" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+
 
     <TextView
         android:id="@+id/countdown_timer"

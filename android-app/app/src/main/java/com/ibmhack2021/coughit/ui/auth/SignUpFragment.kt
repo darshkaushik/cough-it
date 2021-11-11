@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -21,7 +23,9 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.ibmhack2021.coughit.R
 import com.ibmhack2021.coughit.databinding.FragmentSignUpBinding
+import com.ibmhack2021.coughit.model.login.request.LoginRequest
 import com.ibmhack2021.coughit.repository.Repository
+import com.ibmhack2021.coughit.util.Resource
 import kotlin.math.sign
 
 
@@ -157,7 +161,33 @@ class SignUpFragment : Fragment() {
                             +  "\n Phone No. " + user?.phoneNumber
                             + "\n Photo URL: " + user?.photoUrl)
 
-                    findNavController().navigate(R.id.action_signUpFragment_to_homeFragment)
+//                    findNavController().navigate(R.id.action_signUpFragment_to_homeFragment)
+                    // here I have to call the api and make the request
+                    authViewModel.createUser(
+                        LoginRequest(
+                            user?.email!!,
+                            user.photoUrl.toString(),
+                            user.uid
+                        )
+                    )
+
+                    // observe the valu e
+                    authViewModel.login.observe(viewLifecycleOwner, Observer {
+                        when(it){
+                            is Resource.Success ->{
+                                it.data?.let {
+                                    if(it.status.equals("success")){
+
+                                        findNavController().navigate(R.id.action_signUpFragment_to_homeFragment)
+                                    }
+                                }
+                            }
+                            is Resource.Error ->{
+                                auth.signOut()
+                                Toast.makeText(requireContext(), "Try Again", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    })
 
 
                 } else {

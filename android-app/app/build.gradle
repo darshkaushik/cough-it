@@ -39,6 +39,7 @@ android {
 
 dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.0'
 
 
     // version
@@ -103,5 +104,8 @@ dependencies {
 
     // graph view for android
     implementation 'com.jjoe64:graphview:4.2.2'
+
+    // audio visualizer
+    implementation 'com.github.Armen101:AudioRecordView:1.0.5'
 
 }

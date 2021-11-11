@@ -1,6 +1,7 @@
 package com.ibmhack2021.coughit.ui.record
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,13 +15,14 @@ import com.ibmhack2021.coughit.databinding.FragmentHomeBinding
 import com.ibmhack2021.coughit.databinding.FragmentRecordBinding
 import com.ibmhack2021.coughit.repository.Repository
 import com.ibmhack2021.coughit.util.RecordingState
+import java.util.*
 
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 
-class RecordFragment : Fragment() {
+class RecordFragment : Fragment(), DialogResponse {
 
     private var param1: String? = null
     private var param2: String? = null
@@ -33,6 +35,8 @@ class RecordFragment : Fragment() {
 
     private var encodedString: String? = null
     private var state: Boolean = false
+
+    private lateinit var confirmBottomSheet: BottomSheetFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,7 +67,8 @@ class RecordFragment : Fragment() {
             // start the timer on button click
             playButton.setOnClickListener {
                 state = true
-                recordViewModel.startCountdown(playButton, requireContext(), state)
+                recordViewModel.startCountdown(playButton, requireContext(), state, audioRecordView)
+                recordViewModel.updateVisualiser(audioRecordView)
                 playButton.isEnabled = false
             }
 
@@ -75,9 +80,13 @@ class RecordFragment : Fragment() {
             recordViewModel.flag.observe(viewLifecycleOwner, Observer {
                 if(RecordingState.STOP == it){
                     encodedString = recordViewModel.getAudioString()
-                    val action = RecordFragmentDirections.
-                    actionRecordFragmentToPredictionFragment(encodedString = encodedString!!)
-                    findNavController().navigate(action)
+                    Log.d("Prediction", "Encoded String: " + encodedString)
+
+                    // open the dialog
+                    confirmBottomSheet = BottomSheetFragment.newInstance(this@RecordFragment)
+                    confirmBottomSheet.isCancelable = false
+                    confirmBottomSheet.show(requireActivity().supportFragmentManager, "Dialog")
+
                 }
             })
         }
@@ -102,5 +111,19 @@ class RecordFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onButtonClick(status: Boolean) {
+        if(status){
+            confirmBottomSheet.dismiss()
+            val action = RecordFragmentDirections.
+                    actionRecordFragmentToPredictionFragment(encodedString = encodedString!!)
+                    findNavController().navigate(action)
+        }else{
+            // close the dialog and delete the recording
+                confirmBottomSheet.dismiss()
+            recordViewModel.deleteRecording(requireContext())
+
+        }
     }
 }
