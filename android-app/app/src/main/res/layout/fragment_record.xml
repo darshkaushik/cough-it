@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/surface_color"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.record.RecordFragment">
 
@@ -10,6 +11,7 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         app:cardCornerRadius="24dp"
+        app:cardBackgroundColor="@color/surface_color"
         app:layout_constraintBottom_toTopOf="@id/play_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

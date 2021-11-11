@@ -12,7 +12,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.transition.MaterialFadeThrough
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.ktx.Firebase
 import com.ibmhack2021.coughit.R
 import com.ibmhack2021.coughit.databinding.FragmentPredictionBinding
 import com.ibmhack2021.coughit.model.prediction.request.PredictionRequest
