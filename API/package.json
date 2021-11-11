@@ -1,0 +1,29 @@
+{
+  "name": "API",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "@cloudant/cloudant": "^4.5.1",
+    "aws-sdk": "^2.1004.0",
+    "axios": "^0.22.0",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "crypto-js": "^4.1.1",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "ffmpeg": "^0.0.4",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.0.12",
+    "morgan": "^1.10.0",
+    "mp3-to-wav": "^0.1.11",
+    "python-shell": "^3.0.1",
+    "shelljs": "^0.8.4",
+    "uuid": "^8.3.2",
+    "xmlhttprequest": "^1.8.0"
+  }
+}
