@@ -25,7 +25,8 @@
     "python-shell": "^3.0.1",
     "sagemaker": "^0.0.3",
     "shelljs": "^0.8.4",
-    "validator": "^13.7.0"
+    "validator": "^13.7.0",
+    "xmlhttprequest": "^1.8.0"
   },
   "devDependencies": {
     "serverless": "^2.62.0",
