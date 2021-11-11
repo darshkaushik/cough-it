@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.transition.MaterialFadeThrough
 import com.google.firebase.auth.FirebaseAuth
@@ -69,6 +70,9 @@ class PredictionFragment : Fragment() {
         exitTransition = MaterialFadeThrough()
         enterTransition = MaterialFadeThrough()
 
+        binding.progressBar.show()
+        binding.nextButton.isEnabled = false
+
         // current user won't be null
         val currentUser = firebaseAuth.currentUser
         encodedString = args.encodedString
@@ -84,6 +88,8 @@ class PredictionFragment : Fragment() {
                 is Resource.Success ->{
                     it.data?.let {
                         predictViewModel.getActualValue(prediction = it)
+                        binding.progressBar.hide()
+                        binding.nextButton.isEnabled = true
                     }
                 }
             }
@@ -95,7 +101,13 @@ class PredictionFragment : Fragment() {
         predictViewModel.requiredValue.observe(viewLifecycleOwner, Observer {
             // here I can set the text view
             Log.d("Prediction" , it.toString())
+            binding.predictTextView.text = String.format("%.2f", it)
         })
+
+        // navigate to home
+        binding.nextButton.setOnClickListener {
+            findNavController().navigate(R.id.action_predictionFragment_to_homeFragment)
+        }
 
 
 
