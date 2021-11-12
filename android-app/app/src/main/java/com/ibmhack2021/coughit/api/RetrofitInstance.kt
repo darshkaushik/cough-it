@@ -1,5 +1,6 @@
 package com.ibmhack2021.coughit.api
 
+import com.ibmhack2021.coughit.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -10,8 +11,7 @@ class RetrofitInstance {
     companion object{
 
         // base url
-        // todo : change base url
-        const val BASE_URL = "http://ec2-15-206-203-176.ap-south-1.compute.amazonaws.com:8080/api/"
+        const val BASE_URL = BuildConfig.BASE_URL
 
         private val retrofit by lazy {
             val logging = HttpLoggingInterceptor()

@@ -8,16 +8,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.transition.MaterialElevationScale
 import com.google.android.material.transition.MaterialFadeThrough
+import com.google.firebase.auth.FirebaseAuth
 import com.ibmhack2021.coughit.R
 import com.ibmhack2021.coughit.databinding.FragmentHomeBinding
 import com.ibmhack2021.coughit.databinding.FragmentSplashBinding
+import com.ibmhack2021.coughit.model.pasttests.Test
 import com.ibmhack2021.coughit.repository.Repository
+import com.ibmhack2021.coughit.util.Resource
 import com.jjoe64.graphview.GridLabelRenderer
+import com.jjoe64.graphview.LabelFormatter
 import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.LineGraphSeries
 import com.vmadalin.easypermissions.EasyPermissions
@@ -46,6 +51,10 @@ class HomeFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     // view model
     lateinit var homeViewModel: HomeViewModel
 
+    // firebase auth
+    private lateinit var firebaseAuth: FirebaseAuth
+    private var pastTestsList: List<Test>? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -58,6 +67,9 @@ class HomeFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         val homeViewModelProviderFactory = HomeViewModelProviderFactory(repository);
         homeViewModel = ViewModelProvider(this, homeViewModelProviderFactory)
             .get(HomeViewModel::class.java)
+
+        // init the firebase
+        firebaseAuth = FirebaseAuth.getInstance()
     }
 
     override fun onCreateView(
@@ -73,6 +85,22 @@ class HomeFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
         handleFABOnScroll()
 
+        // make the api call
+//        homeViewModel.getPastsTests(firebaseAuth.currentUser?.email!!)
+//
+//        // observe the value
+//        homeViewModel.pastTests.observe(viewLifecycleOwner, Observer {
+//            when(it){
+//                is Resource.Success ->{
+//                    it.data?.let {
+//                        // I will get all the data
+//                        pastTestsList = it.data
+//
+//                    }
+//                }
+//            }
+//        })
+
         // put some points
 //        val series = LineGraphSeries(
 //            arrayOf<DataPoint>(
@@ -84,25 +112,25 @@ class HomeFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 //            )
 //        )
 
-        val doubleArray = arrayOf<Double>(0.532, 0.459, 0.356, 0.987, 0.234)
+        //val doubleArray = arrayOf<Double>(0.532, 0.459, 0.356, 0.987, 0.234)
 
-        val series = homeViewModel.convertToLineGraphSeries(doubleArray)
-
-        series.dataPointsRadius = 10f
-        series.setAnimated(true)
-        series.isDrawDataPoints = true
-        series.title = "Covid Prediction Summary"
-        series.color = requireContext().getColor(R.color.orange_primary)
-        
-        series.setOnDataPointTapListener {
-                series, dataPoint ->
-            Toast.makeText(
-                requireContext(),
-                "DataPoint: " + dataPoint.x + "," + dataPoint.y,
-                Toast.LENGTH_SHORT
-            ).show()
-
-        }
+//        val series = homeViewModel.convertToLineGraphSeries(pastTestsList!!)
+//
+//        series.dataPointsRadius = 10f
+//        series.setAnimated(true)
+//        series.isDrawDataPoints = true
+//        series.title = "Covid Prediction Summary"
+//        series.color = requireContext().getColor(R.color.orange_primary)
+//
+//        series.setOnDataPointTapListener {
+//                series, dataPoint ->
+//            Toast.makeText(
+//                requireContext(),
+//                "DataPoint: " + dataPoint.x + "," + dataPoint.y,
+//                Toast.LENGTH_SHORT
+//            ).show()
+//
+//        }
 
         binding.run {
             val gridLabelRenderer = graphView.gridLabelRenderer
@@ -111,9 +139,10 @@ class HomeFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             gridLabelRenderer.isVerticalLabelsVisible = false
             gridLabelRenderer.isHighlightZeroLines = false
 
+
             // todo : call observer here and just get the series
 
-            graphView.addSeries(series)
+            //graphView.addSeries(series)
 
 
             // test button

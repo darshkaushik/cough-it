@@ -89,6 +89,7 @@ class PredictionFragment : Fragment() {
                         predictViewModel.getActualValue(prediction = it)
                         binding.progressBar.hide()
                         binding.nextButton.isEnabled = true
+                        Log.d("Prediction" , it.data.predictions[0].values[0][0][0].toString())
                     }
                 }
             }
@@ -100,7 +101,7 @@ class PredictionFragment : Fragment() {
         predictViewModel.requiredValue.observe(viewLifecycleOwner, Observer {
             // here I can set the text view
             Log.d("Prediction" , it.toString())
-            binding.predictTextView.text = String.format("%.2f", it)
+            binding.predictTextView.text = String.format("%.3f", it?.times(100))
         })
 
         // navigate to home

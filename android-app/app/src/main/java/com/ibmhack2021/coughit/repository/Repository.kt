@@ -27,6 +27,10 @@ class Repository(context: Context) {
     suspend fun loginToServer(loginRequest: LoginRequest) =
         RetrofitInstance.api.loginToServer(loginRequest = loginRequest)
 
+    // get past tess API
+    suspend fun getPastTests(email: String) =
+        RetrofitInstance.api.getReports(email = email)
+
 
 
 
