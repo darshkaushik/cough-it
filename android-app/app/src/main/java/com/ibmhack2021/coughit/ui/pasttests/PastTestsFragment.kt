@@ -1,15 +1,20 @@
 package com.ibmhack2021.coughit.ui.pasttests
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.transition.MaterialFadeThrough
+import com.google.firebase.auth.FirebaseAuth
 import com.ibmhack2021.coughit.databinding.FragmentPastTestsBinding
 import com.ibmhack2021.coughit.databinding.FragmentRecordBinding
 import com.ibmhack2021.coughit.repository.Repository
+import com.ibmhack2021.coughit.util.Resource
+import java.util.*
 
 
 private const val ARG_PARAM1 = "param1"
@@ -27,6 +32,8 @@ class PastTestsFragment : Fragment() {
     private var _binding: FragmentPastTestsBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var firebaseAuth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -39,6 +46,9 @@ class PastTestsFragment : Fragment() {
         val recordViewModelProviderFactory = PastTestsViewModelProviderFactory(repository)
         pastTestsViewModel = ViewModelProvider(this, recordViewModelProviderFactory)
             .get(PastTestsViewModel::class.java)
+
+        // init the firebase auth
+        firebaseAuth = FirebaseAuth.getInstance()
     }
 
     override fun onCreateView(
@@ -50,6 +60,24 @@ class PastTestsFragment : Fragment() {
 
         exitTransition = MaterialFadeThrough()
         enterTransition = MaterialFadeThrough()
+
+        binding.run {
+
+            // make the api call
+//            pastTestsViewModel.getPastsTests(firebaseAuth.currentUser?.email!!)
+            pastTestsViewModel.getPastsTests("gauravdas014@gmail.com")
+
+            // observer
+            pastTestsViewModel.pastTests.observe(viewLifecycleOwner, Observer {
+                when(it){
+                    is Resource.Success ->{
+                        it.data?.let {
+                            Log.d("reports" , it.data.get(0).prediction)
+                        }
+                    }
+                }
+            })
+        }
 
 
 
