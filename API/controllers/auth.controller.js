@@ -55,25 +55,6 @@ exports.loginUser = asyncHandler(async (req, res) => {
   );
 });
 
-const jwt = require("jsonwebtoken");
-
-const signToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_EXPIRES_IN,
-  });
-};
-
-const createSendToken = asyncHandler(async (user, statusCode, res) => {
-  const token = signToken(user._id);
-  user.token = token;
-  await user.save();
-  user.password = undefined;
-  res.status(statusCode).json({
-    status: "success",
-    user,
-  });
-});
-
 exports.signup = asyncHandler(async (req, res) => {
   const user = await User.findOne({ email: req.body.email });
   if (user) {
