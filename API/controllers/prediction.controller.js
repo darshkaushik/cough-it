@@ -203,7 +203,7 @@ exports.getPrediction = async (req, res) => {
                   _id: uuidv4(),
                   documentType: "predictions",
                   email: req.body.email,
-                  prediction: predictionValue,
+                  prediction: predictionValue.toString(),
                   date: new Date(),
                 };
                 db.insert(ddocPrediction, function (err, result) {
