@@ -1,5 +1,5 @@
 const dotenv = require("dotenv");
-dotenv.config({ path: `./.env` });
+dotenv.config({ path: "./.env" });
 const mongoose = require("mongoose");
 const app = require("./app");
 const http = require("http");

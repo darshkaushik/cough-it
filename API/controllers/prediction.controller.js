@@ -9,18 +9,17 @@ const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 const { v4: uuidv4 } = require("uuid");
 
 // IAM API KEY of IBM Cloud
-const API_KEY = "Z53pnfFDwVayUCVgtVFbDcgmKKPIT0GlUeOY2yZTnV5P";
+const API_KEY = process.env.ML_API_KEY;
 
 // ML Endpoint from IBM
-const ML_ENDPOINT =
-  "https://us-south.ml.cloud.ibm.com/ml/v4/deployments/028e5f30-3b99-45a9-9f21-b6b2670101b4/predictions?version=2021-11-12";
+const ML_ENDPOINT = process.env.ML_ENDPOINT;
 
 // Database Connectivity
 const Cloudant = require("@cloudant/cloudant");
 const cloudant = new Cloudant({
-  url: "https://19bfb4e7-9436-46dc-9482-9c23c5a73963-bluemix.cloudantnosqldb.appdomain.cloud",
+  url: process.env.CLOUDANT_DB_URL,
   plugins: {
-    iamauth: { iamApiKey: "sOGe8NNT3MCHJablwqsaslgwZXWOs6mDAYCCz09lOOKs" },
+    iamauth: { iamApiKey: process.env.CLOUDANT_IAM_API_KEY },
   },
 });
 let db;
