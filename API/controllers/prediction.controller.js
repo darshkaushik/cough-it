@@ -68,6 +68,11 @@ exports.getPrediction = async (req, res) => {
       options,
       async function (err, result) {
         if (err) throw err;
+
+        fs.unlink("assets/output/sample.wav", () => {
+          console.log("Sample Audio deleted successfully");
+        });
+
         dataToSend = result.toString();
 
         const inputDataToBeSentToModel = {
