@@ -93,7 +93,7 @@ exports.getPrediction = async (req, res) => {
         const inputDataToBeSentToModel = {
           input_data: [
             {
-              values: dataToSend,
+              values: JSON.parse(dataToSend),
             },
           ],
         };
@@ -151,8 +151,16 @@ exports.getPrediction = async (req, res) => {
             } catch (ex) {
               // TODO: handle parsing exception
             }
-            // const payload = JSON.stringify(sampleData.sample_data);
+            const payloadOld = JSON.stringify(sampleData.sample_data);
             const payload = JSON.stringify(inputDataToBeSentToModel);
+            // console.log("payloaddddddddddddd", payload);
+            // console.log("payload old", payloadOld);
+            fs.writeFileSync("payloadOld.txt", payloadOld, function () {
+              console.log("file written");
+            });
+            fs.writeFileSync("payloadNew.txt", payload, function () {
+              console.log("file written");
+            });
             const scoring_url = ML_ENDPOINT;
             apiPost(
               scoring_url,
@@ -165,6 +173,8 @@ exports.getPrediction = async (req, res) => {
                 } catch (ex) {
                   // TODO: handle parsing exception
                 }
+
+                console.log(parsedPostResponse);
                 // res.json(parsedPostResponse);
                 const responseToTheApi = {
                   predictions: [
@@ -189,12 +199,30 @@ exports.getPrediction = async (req, res) => {
                 const predictionValue =
                   responseToTheApi.predictions[0].values[0][0][0];
 
-                console.log(predictionValue, "dd");
+                const ddocPrediction = {
+                  _id: uuidv4(),
+                  documentType: "predictions",
+                  email: req.body.email,
+                  prediction: predictionValue,
+                  date: new Date(),
+                };
+                db.insert(ddocPrediction, function (err, result) {
+                  if (err) {
+                    throw err;
+                  }
+                  console.log("insert successful");
+                  // return res.status(200).json({
+                  //   status: "success",
+                  //   data: responseToTheApi,
+                  // });
+                });
 
                 return res.status(200).json({
                   status: "success",
-                  data: responseToTheApi,
+                  data: parsedPostResponse,
                 });
+
+                // console.log(predictionValue, "dd");
               },
               function (error) {
                 console.log(error);
