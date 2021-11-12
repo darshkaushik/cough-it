@@ -166,7 +166,7 @@ exports.getPrediction = async (req, res) => {
                 };
 
                 const predictionValue =
-                  responseToTheApi.predictions[0].values[0][0][0];
+                  parsedPostResponse.predictions[0].values[0][0][0];
 
                 // Store prediction into Database
                 const ddocPrediction = {
