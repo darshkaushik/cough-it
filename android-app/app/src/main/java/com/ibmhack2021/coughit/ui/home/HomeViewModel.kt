@@ -5,10 +5,16 @@ import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.ibmhack2021.coughit.model.pasttests.PastTests
+import com.ibmhack2021.coughit.model.pasttests.Test
 import com.ibmhack2021.coughit.repository.Repository
+import com.ibmhack2021.coughit.util.Resource
 import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.LineGraphSeries
 import com.vmadalin.easypermissions.EasyPermissions
+import kotlinx.coroutines.launch
+import retrofit2.Response
 
 class HomeViewModel(val repository: Repository) : ViewModel() {
 
@@ -28,17 +34,43 @@ class HomeViewModel(val repository: Repository) : ViewModel() {
         )
     )
 
+    // mutable live data for past tests
+    val pastTests : MutableLiveData<Resource<PastTests>> = MutableLiveData()
+
+    // api call to get the pasts tests
+    fun getPastsTests(email: String) = viewModelScope.launch {
+        pastTests.postValue(Resource.Loading())
+
+        // make the network call
+        val response = repository.getPastTests(email = email)
+        pastTests.postValue(handleRestResponse(response))
+    }
+
+
+
+    // handle api response for prediction
+    fun handleRestResponse(response: Response<PastTests>) : Resource<PastTests> {
+        if(response.isSuccessful){
+            response.body()?.let {
+                return Resource.Success(it)
+            }
+        }
+
+        return Resource.Error(response.message())
+    }
+
     // I will get just a simple array in retrofit call
     // I have to create a fun to convert this data points to something like this
 
-    fun convertToLineGraphSeries(array: Array<Double>) : LineGraphSeries<DataPoint>{
+    fun convertToLineGraphSeries(array: List<Test>) : LineGraphSeries<DataPoint>{
         // val array = arrayOf<Double>(elements)
         val series = LineGraphSeries(arrayOf<DataPoint>())
         for(i in array.indices){
-            series.appendData(DataPoint((i).toDouble(), (array[i]).toDouble()), true, 20)
+            series.appendData(DataPoint((i).toDouble(), (array[i].prediction).toDouble()), true, 20)
         }
         return series
     }
+
 
     fun handlePermissions(context: Context, perms: Array<out String>): Boolean {
         return EasyPermissions.hasPermissions(

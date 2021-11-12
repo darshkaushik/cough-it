@@ -63,7 +63,7 @@ class PastTestsFragment : Fragment() {
 
         binding.run {
 
-            // make the api call
+            // make the api call todo: remember to change it with current user url
 //            pastTestsViewModel.getPastsTests(firebaseAuth.currentUser?.email!!)
             pastTestsViewModel.getPastsTests("gauravdas014@gmail.com")
 

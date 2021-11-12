@@ -1,5 +1,6 @@
 package com.ibmhack2021.coughit.ui.prediction
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -9,6 +10,8 @@ import com.ibmhack2021.coughit.repository.Repository
 import com.ibmhack2021.coughit.util.Resource
 import kotlinx.coroutines.launch
 import retrofit2.Response
+import java.net.SocketTimeoutException
+import java.util.concurrent.TimeoutException
 
 class PredictViewModel(val repository: Repository) : ViewModel() {
 
@@ -22,8 +25,13 @@ class PredictViewModel(val repository: Repository) : ViewModel() {
         predictedValue.postValue(Resource.Loading())
 
         // then make the network call
-        val response = repository.getPrediction(predictionRequest = predictionRequest)
-        predictedValue.postValue(handleRestResponse(response))
+        try{
+            val response = repository.getPrediction(predictionRequest = predictionRequest)
+            predictedValue.postValue(handleRestResponse(response))
+        }catch (e : SocketTimeoutException){
+            Log.d("Prediction" , "timeout")
+        }
+
     }
 
     // function to filter the response and get the required value

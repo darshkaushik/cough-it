@@ -89,6 +89,7 @@ class PredictionFragment : Fragment() {
                         predictViewModel.getActualValue(prediction = it)
                         binding.progressBar.hide()
                         binding.nextButton.isEnabled = true
+                        Log.d("Prediction" , it.data.predictions[0].values[0][0][0].toString())
                     }
                 }
             }
