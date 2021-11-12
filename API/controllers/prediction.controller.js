@@ -1,47 +1,34 @@
+// import libraries
 const fs = require("fs");
 const { PythonShell } = require("python-shell");
 const { exec } = require("child_process");
 const axios = require("axios");
 const AWS = require("aws-sdk");
 const sampleData = require("../sample-request");
+const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 const { v4: uuidv4 } = require("uuid");
 
+// IAM API KEY of IBM Cloud
+const API_KEY = "Z53pnfFDwVayUCVgtVFbDcgmKKPIT0GlUeOY2yZTnV5P";
+
+// ML Endpoint from IBM
 const ML_ENDPOINT =
   "https://us-south.ml.cloud.ibm.com/ml/v4/deployments/028e5f30-3b99-45a9-9f21-b6b2670101b4/predictions?version=2021-11-12";
 
+// Database Connectivity
 const Cloudant = require("@cloudant/cloudant");
-
 const cloudant = new Cloudant({
   url: "https://19bfb4e7-9436-46dc-9482-9c23c5a73963-bluemix.cloudantnosqldb.appdomain.cloud",
   plugins: {
     iamauth: { iamApiKey: "sOGe8NNT3MCHJablwqsaslgwZXWOs6mDAYCCz09lOOKs" },
   },
 });
-
 let db;
 
 db = cloudant.use("predictions");
 
 exports.getStats = async (req, res) => {
   const email = req.params.email;
-  // const ddoc = {
-  //   _id: uuidv4(),
-  //   documentType: "predictions",
-  //   email: email,
-  //   prediction: prediction,
-  //   date: new Date(),
-  // };
-  // db.insert(ddoc, function (err, result) {
-  //   if (err) {
-  //     throw err;
-  //   }
-  //   console.log("insert successful");
-  //   return res.status(200).json({
-  //     status: "success",
-  //     data: ddoc,
-  //   });
-  // });
-
   db.find(
     { selector: { email, documentType: "predictions" } },
     function (err, existingdoc) {
@@ -64,16 +51,12 @@ exports.getPrediction = async (req, res) => {
         "base64"
       )
     );
-
     let dataToSend;
-
     let options = {};
-
     await exec(
       "ffmpeg -i assets/data/sample.m4a assets/output/sample.wav",
       (err, stdout, stderr) => {
         if (err) {
-          //some err occurred
           console.error(err);
         } else {
           console.log("Converted");
@@ -88,8 +71,6 @@ exports.getPrediction = async (req, res) => {
         if (err) throw err;
         dataToSend = result.toString();
 
-        // const data = JSON.stringify(dataToSend);
-
         const inputDataToBeSentToModel = {
           input_data: [
             {
@@ -97,14 +78,6 @@ exports.getPrediction = async (req, res) => {
             },
           ],
         };
-
-        // console.log(inputDataToBeSentToModel);
-
-        //////////////////////////////////////////////
-
-        const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-
-        const API_KEY = "Z53pnfFDwVayUCVgtVFbDcgmKKPIT0GlUeOY2yZTnV5P";
 
         function getToken(errorCallback, loadCallback) {
           const req = new XMLHttpRequest();
@@ -147,20 +120,21 @@ exports.getPrediction = async (req, res) => {
             let tokenResponse;
             try {
               tokenResponse = JSON.parse(this.responseText);
-              // console.log(tokenResponse.token, "token");
-            } catch (ex) {
-              // TODO: handle parsing exception
-            }
-            const payloadOld = JSON.stringify(sampleData.sample_data);
+            } catch (ex) {}
+            // const payloadOld = JSON.stringify(sampleData.sample_data);
             const payload = JSON.stringify(inputDataToBeSentToModel);
             // console.log("payloaddddddddddddd", payload);
             // console.log("payload old", payloadOld);
-            fs.writeFileSync("payloadOld.txt", payloadOld, function () {
-              console.log("file written");
-            });
-            fs.writeFileSync("payloadNew.txt", payload, function () {
-              console.log("file written");
-            });
+
+            // Below two lines are responsible for seeing how the payload looks like
+
+            // fs.writeFileSync("payloadOld.txt", payloadOld, function () {
+            //   console.log("file written");
+            // });
+            // fs.writeFileSync("payloadNew.txt", payload, function () {
+            //   console.log("file written");
+            // });
+
             const scoring_url = ML_ENDPOINT;
             apiPost(
               scoring_url,
@@ -170,12 +144,8 @@ exports.getPrediction = async (req, res) => {
                 let parsedPostResponse;
                 try {
                   parsedPostResponse = JSON.parse(this.responseText);
-                } catch (ex) {
-                  // TODO: handle parsing exception
-                }
+                } catch (ex) {}
 
-                console.log(parsedPostResponse);
-                // res.json(parsedPostResponse);
                 const responseToTheApi = {
                   predictions: [
                     {
@@ -199,6 +169,7 @@ exports.getPrediction = async (req, res) => {
                 const predictionValue =
                   responseToTheApi.predictions[0].values[0][0][0];
 
+                // Store prediction into Database
                 const ddocPrediction = {
                   _id: uuidv4(),
                   documentType: "predictions",
@@ -210,19 +181,13 @@ exports.getPrediction = async (req, res) => {
                   if (err) {
                     throw err;
                   }
-                  console.log("insert successful");
-                  // return res.status(200).json({
-                  //   status: "success",
-                  //   data: responseToTheApi,
-                  // });
                 });
 
+                // Send response to App
                 return res.status(200).json({
                   status: "success",
                   data: parsedPostResponse,
                 });
-
-                // console.log(predictionValue, "dd");
               },
               function (error) {
                 console.log(error);
@@ -230,8 +195,6 @@ exports.getPrediction = async (req, res) => {
             );
           }
         );
-
-        ///////////////////////////////////////////////////
       }
     );
   } catch (err) {
