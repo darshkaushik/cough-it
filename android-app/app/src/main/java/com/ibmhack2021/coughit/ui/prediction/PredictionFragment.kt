@@ -101,7 +101,7 @@ class PredictionFragment : Fragment() {
         predictViewModel.requiredValue.observe(viewLifecycleOwner, Observer {
             // here I can set the text view
             Log.d("Prediction" , it.toString())
-            binding.predictTextView.text = String.format("%.2f", it)
+            binding.predictTextView.text = String.format("%.3f", it?.times(100))
         })
 
         // navigate to home
