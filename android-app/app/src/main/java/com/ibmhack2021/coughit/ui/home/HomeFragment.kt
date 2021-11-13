@@ -23,6 +23,7 @@ import com.ibmhack2021.coughit.repository.Repository
 import com.ibmhack2021.coughit.util.Resource
 import com.jjoe64.graphview.GridLabelRenderer
 import com.jjoe64.graphview.LabelFormatter
+import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter
 import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.LineGraphSeries
 import com.vmadalin.easypermissions.EasyPermissions
@@ -53,7 +54,7 @@ class HomeFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
     // firebase auth
     private lateinit var firebaseAuth: FirebaseAuth
-    private var pastTestsList: List<Test>? = null
+//    private var pastTestsList: List<Test>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,6 +71,8 @@ class HomeFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
         // init the firebase
         firebaseAuth = FirebaseAuth.getInstance()
+
+//        Log.d("appstatus", "on Create ")
     }
 
     override fun onCreateView(
@@ -79,6 +82,8 @@ class HomeFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         // Inflate the layout for this fragment
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
+//        Log.d("appstatus", "binding successful")
+
         exitTransition = MaterialFadeThrough()
         enterTransition = MaterialFadeThrough()
 
@@ -86,22 +91,11 @@ class HomeFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         handleFABOnScroll()
 
         // make the api call
-//        homeViewModel.getPastsTests(firebaseAuth.currentUser?.email!!)
-//
-//        // observe the value
-//        homeViewModel.pastTests.observe(viewLifecycleOwner, Observer {
-//            when(it){
-//                is Resource.Success ->{
-//                    it.data?.let {
-//                        // I will get all the data
-//                        pastTestsList = it.data
-//
-//                    }
-//                }
-//            }
-//        })
+        homeViewModel.getPastsTests(firebaseAuth.currentUser?.email!!)
+//        homeViewModel.getPastsTests("gauravdas014@gmail.com")
 
-        // put some points
+
+//         put some points
 //        val series = LineGraphSeries(
 //            arrayOf<DataPoint>(
 //                DataPoint((0).toDouble(),(1).toDouble()),
@@ -116,11 +110,6 @@ class HomeFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 //        val series = homeViewModel.convertToLineGraphSeries(pastTestsList!!)
 //
-//        series.dataPointsRadius = 10f
-//        series.setAnimated(true)
-//        series.isDrawDataPoints = true
-//        series.title = "Covid Prediction Summary"
-//        series.color = requireContext().getColor(R.color.orange_primary)
 //
 //        series.setOnDataPointTapListener {
 //                series, dataPoint ->
@@ -138,9 +127,33 @@ class HomeFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             gridLabelRenderer.gridStyle = GridLabelRenderer.GridStyle.HORIZONTAL
             gridLabelRenderer.isVerticalLabelsVisible = false
             gridLabelRenderer.isHighlightZeroLines = false
+            gridLabelRenderer.isHorizontalLabelsVisible = false
 
 
-            // todo : call observer here and just get the series
+
+            // observe the value
+            homeViewModel.pastTests.observe(viewLifecycleOwner, Observer {
+                when(it){
+                    is Resource.Success ->{
+                        it.data?.let {
+                            // I will get all the data
+                            homeViewModel.convertToLineGraphSeries(it.data)
+
+                        }
+                    }
+                }
+            })
+
+            homeViewModel.series.observe(viewLifecycleOwner, Observer {
+                it.dataPointsRadius = 10f
+                it.setAnimated(true)
+                it.isDrawDataPoints = true
+                it.title = "Covid Prediction Summary"
+                it.color = requireContext().getColor(R.color.orange_primary)
+                graphView.addSeries(it)
+            })
+
+
 
             //graphView.addSeries(series)
 
