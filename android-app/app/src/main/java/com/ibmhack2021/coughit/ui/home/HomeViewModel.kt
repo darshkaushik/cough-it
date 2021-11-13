@@ -18,6 +18,7 @@ import com.vmadalin.easypermissions.BuildConfig
 import com.vmadalin.easypermissions.EasyPermissions
 import kotlinx.coroutines.launch
 import retrofit2.Response
+import java.text.DateFormat
 import java.util.*
 
 class HomeViewModel(val repository: Repository) : ViewModel() {
@@ -67,7 +68,7 @@ class HomeViewModel(val repository: Repository) : ViewModel() {
         series.postValue(series2)
     }
 
-    fun extractDate(date : String) : Date{
+    fun extractDate(date : String) : String{
         // 2021-11-12T14:10:24.159Z --> format of the string
         val year = date.substring(0,4).toInt()
         val month = date.substring(5,7).toInt()
@@ -80,7 +81,9 @@ class HomeViewModel(val repository: Repository) : ViewModel() {
         calendar.add(Calendar.MONTH, month)
         calendar.add(Calendar.YEAR, year)
 
-        return calendar.time
+        val date = Date(year-1900, month-1, day)
+        return DateFormat.getDateInstance().format(date)
+
 
     }
 

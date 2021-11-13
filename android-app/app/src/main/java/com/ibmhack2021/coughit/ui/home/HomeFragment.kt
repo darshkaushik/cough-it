@@ -139,6 +139,12 @@ class HomeFragment : Fragment(), EasyPermissions.PermissionCallbacks {
                             // I will get all the data
                             homeViewModel.convertToLineGraphSeries(it.data)
 
+                            // here I have to set the text views
+                            val latest = it.data[it.data.size - 1]
+                            dateTextView.text = homeViewModel.extractDate(latest.date)
+                            val resultText = String.format("%.2f" , latest.prediction.toDouble()*100) + "%"
+                            resultTextView.text = resultText
+
                         }
                     }
                 }
