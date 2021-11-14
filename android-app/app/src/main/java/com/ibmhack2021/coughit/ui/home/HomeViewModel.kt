@@ -28,7 +28,7 @@ class HomeViewModel(val repository: Repository) : ViewModel() {
 
 
     // I have to provide the fragment with this value or value type
-    val series: MutableLiveData<LineGraphSeries<DataPoint>> =
+    val series: MutableLiveData<LineGraphSeries<DataPoint>?> =
         MutableLiveData()
 
     // mutable live data for past tests
@@ -61,15 +61,21 @@ class HomeViewModel(val repository: Repository) : ViewModel() {
     // I will get just a simple array in retrofit call
     // I have to create a fun to convert this data points to something like this
 
-    fun convertToLineGraphSeries(array: List<Test>, linearProgressIndicator: LinearProgressIndicator) = viewModelScope.launch {
+    fun convertToLineGraphSeries(array: List<Test>?, linearProgressIndicator: LinearProgressIndicator) = viewModelScope.launch {
         // val array = arrayOf<Double>(elements)
-        val series2 = LineGraphSeries(arrayOf<DataPoint>())
-        for(i in array.indices){
-            series2.appendData(DataPoint((i).toDouble(), (array[i].prediction).toDouble().times(100)), true, 20)
-            Log.d("homefragment", array[i].prediction + " Date stamp : " + array[i].date)
+        if(array != null){
+            val series2 = LineGraphSeries(arrayOf<DataPoint>())
+            for(i in array.indices){
+                series2.appendData(DataPoint((i).toDouble(), (array[i].prediction).toDouble().times(100)), true, 20)
+                Log.d("homefragment", array[i].prediction + " Date stamp : " + array[i].date)
+            }
+            linearProgressIndicator.hide()
+            series.postValue(series2)
+        }else{
+            series.postValue(null)
+            linearProgressIndicator.hide()
         }
-        linearProgressIndicator.hide()
-        series.postValue(series2)
+
     }
 
     fun extractDate(date : String) : String{

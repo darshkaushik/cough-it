@@ -242,6 +242,7 @@
                             app:layout_constraintBottom_toBottomOf="parent"/>
 
                         <com.airbnb.lottie.LottieAnimationView
+                            android:id="@+id/lottie_recent"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             app:lottie_rawRes="@raw/result"
@@ -346,6 +347,18 @@
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </com.google.android.material.card.MaterialCardView>
+
+                <TextView
+                    android:id="@+id/no_data_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:text="No Past Tests Found"
+                    android:visibility="invisible"
+                    app:layout_constraintTop_toTopOf="@id/graph_view"
+                    app:layout_constraintBottom_toBottomOf="@id/graph_view"
+                    app:layout_constraintStart_toStartOf="@id/graph_view"
+                    app:layout_constraintEnd_toEndOf="@id/graph_view"/>
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

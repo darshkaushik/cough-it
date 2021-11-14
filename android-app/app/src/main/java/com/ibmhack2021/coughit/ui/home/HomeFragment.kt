@@ -95,34 +95,8 @@ class HomeFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
         // make the api call
         homeViewModel.getPastsTests(firebaseAuth.currentUser?.email!!)
-//        homeViewModel.getPastsTests("gauravdas014@gmail.com")
+//        homeViewModel.getPastsTests("jyotimoykashyap123@gmail.com")
 
-
-//         put some points
-//        val series = LineGraphSeries(
-//            arrayOf<DataPoint>(
-//                DataPoint((0).toDouble(),(1).toDouble()),
-//                DataPoint((1).toDouble(),(5).toDouble()),
-//                DataPoint((2).toDouble(),(3).toDouble()),
-//                DataPoint((3).toDouble(),(2).toDouble()),
-//                DataPoint((4).toDouble(),(6).toDouble())
-//            )
-//        )
-
-        //val doubleArray = arrayOf<Double>(0.532, 0.459, 0.356, 0.987, 0.234)
-
-//        val series = homeViewModel.convertToLineGraphSeries(pastTestsList!!)
-//
-//
-//        series.setOnDataPointTapListener {
-//                series, dataPoint ->
-//            Toast.makeText(
-//                requireContext(),
-//                "DataPoint: " + dataPoint.x + "," + dataPoint.y,
-//                Toast.LENGTH_SHORT
-//            ).show()
-//
-//        }
 
         binding.run {
             val gridLabelRenderer = graphView.gridLabelRenderer
@@ -151,28 +125,44 @@ class HomeFragment : Fragment(), EasyPermissions.PermissionCallbacks {
                     is Resource.Success ->{
                         it.data?.let {
                             // I will get all the data
-                            homeViewModel.convertToLineGraphSeries(it.data, progressLoad)
+                            if(it.data == null || it.data.isEmpty()){
+                                homeViewModel.convertToLineGraphSeries(null, progressLoad)
 
-                            // here I have to set the text views
-                            val latest = it.data[it.data.size - 1]
-                            dateTextView.text = homeViewModel.extractDate(latest.date)
-                            val resultText = String.format("%.2f" , latest.prediction.toDouble()*100) + "%"
-                            resultTextView.text = resultText
-                            timeTextView.text = homeViewModel.extractTime(latest.date)
-                            tagChip.text = if(latest.prediction.toDouble()*100 < 70) "Safe" else "Unsafe"
+                                dateTextView.text = "No data found"
+                                timeTextView.text = "You have not taken any test till now."
+                                tagChip.visibility = View.INVISIBLE
+                                lottieRecent.visibility = View.INVISIBLE
+                            }else{
+                                tagChip.visibility = View.VISIBLE
+                                lottieRecent.visibility = View.VISIBLE
+                                homeViewModel.convertToLineGraphSeries(it.data, progressLoad)
 
+                                // here I have to set the text views
+                                val latest = it.data[it.data.size - 1]
+                                dateTextView.text = homeViewModel.extractDate(latest.date)
+                                val resultText = String.format("%.2f" , latest.prediction.toDouble()*100) + "%"
+                                resultTextView.text = resultText
+                                timeTextView.text = homeViewModel.extractTime(latest.date)
+                                tagChip.text = if(latest.prediction.toDouble()*100 < 70) "Safe" else "Unsafe"
+                            }
                         }
                     }
                 }
             })
 
             homeViewModel.series.observe(viewLifecycleOwner, Observer {
-                it.dataPointsRadius = 10f
-                it.setAnimated(true)
-                it.isDrawDataPoints = true
-                it.title = "Covid Prediction Summary"
-                it.color = requireContext().getColor(R.color.orange_primary)
-                graphView.addSeries(it)
+                if(it != null){
+                    noDataText.visibility = View.INVISIBLE
+                    it.dataPointsRadius = 10f
+                    it.setAnimated(true)
+                    it.isDrawDataPoints = true
+                    it.title = "Covid Prediction Summary"
+                    it.color = requireContext().getColor(R.color.orange_primary)
+                    graphView.addSeries(it)
+                }else{
+                    noDataText.visibility = View.VISIBLE
+                }
+
             })
 
 
