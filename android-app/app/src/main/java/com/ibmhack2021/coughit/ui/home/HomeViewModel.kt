@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.gson.internal.bind.util.ISO8601Utils
 import com.ibmhack2021.coughit.model.pasttests.PastTests
 import com.ibmhack2021.coughit.model.pasttests.Test
 import com.ibmhack2021.coughit.repository.Repository
@@ -19,6 +20,7 @@ import com.vmadalin.easypermissions.EasyPermissions
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import java.text.DateFormat
+import java.text.SimpleDateFormat
 import java.util.*
 
 class HomeViewModel(val repository: Repository) : ViewModel() {
@@ -85,6 +87,26 @@ class HomeViewModel(val repository: Repository) : ViewModel() {
         return DateFormat.getDateInstance().format(date)
 
 
+    }
+
+    fun extractTime(time : String) : String{
+        // 2021-11-12T14:10:24.159Z --> format of the string
+        val year = time.substring(0,4).toInt()
+        val month = time.substring(5,7).toInt()
+        val day = time.substring(8,10).toInt()
+        val hours = time.substring(11, 13).toInt()
+        val min = time.substring(14, 16).toInt()
+        val seconds = time.substring(17,19).toInt()
+
+        val time = DateFormat.getTimeInstance()
+        val date = Date(year, month, day, hours, min, seconds)
+
+        val simpleDateFormat = SimpleDateFormat("EEEE")
+        val dayOfWeek = simpleDateFormat.format(date)
+
+        val string = DateFormat.getTimeInstance(DateFormat.MEDIUM).format(date) + ", " + dayOfWeek
+
+        return string
     }
 
 

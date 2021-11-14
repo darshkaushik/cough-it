@@ -156,6 +156,8 @@ class HomeFragment : Fragment(), EasyPermissions.PermissionCallbacks {
                             dateTextView.text = homeViewModel.extractDate(latest.date)
                             val resultText = String.format("%.2f" , latest.prediction.toDouble()*100) + "%"
                             resultTextView.text = resultText
+                            timeTextView.text = homeViewModel.extractTime(latest.date)
+                            tagChip.text = if(latest.prediction.toDouble()*100 < 70) "Safe" else "Unsafe"
 
                         }
                     }
