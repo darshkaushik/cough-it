@@ -97,5 +97,24 @@
         android:id="@+id/aboutUsFragment"
         android:name="com.ibmhack2021.coughit.ui.home.settings.AboutUsFragment"
         android:label="fragment_about_us"
-        tools:layout="@layout/fragment_about_us" />
+        tools:layout="@layout/fragment_about_us" >
+        <action
+            android:id="@+id/action_aboutUsFragment_to_socialMediaFragment"
+            app:destination="@id/socialMediaFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/socialMediaFragment"
+        android:name="com.ibmhack2021.coughit.ui.home.settings.SocialMediaFragment"
+        android:label="fragment_social_media"
+        tools:layout="@layout/fragment_social_media" >
+        <argument
+            android:name="github"
+            app:argType="string" />
+        <argument
+            android:name="linkedin"
+            app:argType="string" />
+        <argument
+            android:name="email"
+            app:argType="string" />
+    </dialog>
 </navigation>
