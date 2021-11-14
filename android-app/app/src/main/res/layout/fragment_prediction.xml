@@ -16,6 +16,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/covid_result"
+        app:layout_constraintEnd_toEndOf="@id/predict_text_view"
+        app:layout_constraintStart_toStartOf="@id/predict_text_view"
+        app:layout_constraintTop_toTopOf="@id/predict_text_view"
+        app:layout_constraintBottom_toBottomOf="@id/predict_text_view"/>
+
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/predict_text_view"
         android:layout_width="wrap_content"
@@ -61,7 +72,6 @@
         app:cornerRadius="40dp"
         app:iconPadding="0dp"
         app:iconGravity="textStart"
-        app:backgroundTint="@color/orange_primary"
         app:iconTint="@color/surface_color"
         style="@style/Widget.Material3.Button.UnelevatedButton"
         app:icon="@drawable/ic_round_navigate_next_24"

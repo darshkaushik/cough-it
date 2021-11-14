@@ -161,15 +161,16 @@
                     android:id="@+id/recent_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Recent Test"
+                    android:text="RECENT TEST"
                     app:layout_constraintTop_toBottomOf="@id/past_tests"
                     android:layout_marginStart="12dp"
                     android:fontFamily="@font/poppins_medium"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="@id/past_tests"
                     android:layout_marginTop="24dp"/>
 
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/recent_card"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/elevated_surfaces"
@@ -178,7 +179,6 @@
                     android:layout_marginEnd="24dp"
                     app:cardCornerRadius="24dp"
                     android:layout_marginBottom="50dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@id/past_tests"
                     app:layout_constraintEnd_toEndOf="@id/past_tests"
                     android:layout_marginTop="12dp"
@@ -251,6 +251,96 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="@id/result_text_view"
                             app:layout_constraintStart_toStartOf="@id/result_text_view"/>
+
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/discover_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="DISCOVER"
+                    app:layout_constraintTop_toBottomOf="@id/recent_card"
+                    android:layout_marginStart="32dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="24dp"/>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/guideline_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/elevated_surfaces"
+                    app:layout_constraintTop_toBottomOf="@id/discover_text"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    app:cardCornerRadius="24dp"
+                    android:layout_marginBottom="50dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="12dp"
+                    style="?attr/materialCardViewFilledStyle">
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/heading_covid"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:fontFamily="@font/poppins_medium"
+                            android:textSize="16sp"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginStart="24dp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:textColor="@color/heading_text_color"
+                            android:text="COVID-19 Guidelines"/>
+
+                        <com.airbnb.lottie.LottieAnimationView
+                            android:id="@+id/lottie"
+                            android:layout_width="130dp"
+                            android:layout_height="130dp"
+                            app:lottie_loop="true"
+                            app:lottie_autoPlay="true"
+                            app:lottie_rawRes="@raw/wear_mark"
+                            android:layout_marginEnd="12dp"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginBottom="12dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/body_text"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/covid_guide"
+                            app:fontFamily="@font/poppins_light"
+                            android:textColor="@color/body_text_color"
+                            android:textSize="14sp"
+                            android:layout_marginStart="24dp"
+                            android:layout_marginEnd="24dp"
+                            android:layout_marginBottom="12dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/lottie"
+                            app:layout_constraintTop_toBottomOf="@id/heading_covid"/>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/more_info_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="More Info"
+                            style="@style/Widget.Material3.Button.TextButton"
+                            android:layout_marginStart="12dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/body_text"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:layout_marginBottom="12dp"/>
 
 
 
