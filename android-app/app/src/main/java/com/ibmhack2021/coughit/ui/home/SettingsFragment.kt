@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.transition.MaterialFadeThrough
 import com.google.firebase.auth.FirebaseAuth
 import com.ibmhack2021.coughit.R
 import com.ibmhack2021.coughit.databinding.FragmentSettingsBinding
@@ -44,6 +45,9 @@ class SettingsFragment : BottomSheetDialogFragment() {
         // Inflate the layout for this fragment
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
 
+        exitTransition = MaterialFadeThrough()
+        enterTransition = MaterialFadeThrough()
+
         val currentUser = firebaseAuth.currentUser
 
         // load the account icon
@@ -62,6 +66,11 @@ class SettingsFragment : BottomSheetDialogFragment() {
             logout.setOnClickListener {
                 firebaseAuth.signOut()
                 findNavController().navigate(R.id.action_settingsFragment_to_splashFragment)
+            }
+
+            // about us
+            aboutUs.setOnClickListener {
+                findNavController().navigate(R.id.action_settingsFragment_to_aboutUsFragment)
             }
         }
 

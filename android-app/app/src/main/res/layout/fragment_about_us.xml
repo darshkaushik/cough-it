@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/surface_color"
+    android:backgroundTint="@color/surface_color"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.home.settings.AboutUsFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/surface_color"
+            android:backgroundTint="@color/surface_color">
+
+            <ImageView
+                android:id="@+id/image_icon"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:src="@drawable/ic_app_icon"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="40dp"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/app_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:fontFamily="@font/poppins_medium"
+                android:text="Cough It"
+                app:layout_constraintTop_toBottomOf="@id/image_icon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="20dp"
+                android:textSize="22sp"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/email_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:fontFamily="@font/poppins_medium"
+                android:text="team.cought.it@gmail.com"
+                android:textIsSelectable="true"
+                android:autoLink="email"
+                app:layout_constraintTop_toBottomOf="@id/app_name"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="0dp"
+                android:textSize="14sp"/>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/the_team"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="The Team"
+                app:fontFamily="@font/poppins_semibold"
+                android:textSize="20sp"
+                android:layout_marginTop="24dp"
+                android:layout_marginStart="24dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/email_id"/>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/darsh_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                app:cardCornerRadius="24dp"
+                android:backgroundTint="@color/elevated_surfaces"
+                app:layout_constraintTop_toBottomOf="@id/the_team"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="12dp"
+                style="?attr/materialCardViewFilledStyle">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/profile_image_1"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"/>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/darsh"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="19sp"
+                        android:text="Darsh Kaushik"
+                        app:fontFamily="@font/poppins_medium"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/profile_image_1"
+                        android:layout_marginTop="22dp"
+                        android:layout_marginStart="12dp"/>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:text="ML Engineer"
+                        app:fontFamily="@font/poppins_light"
+                        app:layout_constraintTop_toBottomOf="@id/darsh"
+                        app:layout_constraintStart_toEndOf="@id/profile_image_1"
+                        android:layout_marginStart="12dp"/>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <!--    Gaurav Card-->
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/gaurav_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                app:cardCornerRadius="24dp"
+                android:backgroundTint="@color/elevated_surfaces"
+                app:layout_constraintTop_toBottomOf="@id/darsh_card"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="8dp"
+                style="?attr/materialCardViewFilledStyle">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/profile_image_2"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
+                        app:srcCompat="@drawable/gaurav_das"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"/>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/gaurav"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="19sp"
+                        android:text="Gaurav Das"
+                        app:fontFamily="@font/poppins_medium"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/profile_image_2"
+                        android:layout_marginTop="22dp"
+                        android:layout_marginStart="12dp"/>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:text="Full Stack Web Developer"
+                        app:fontFamily="@font/poppins_light"
+                        app:layout_constraintTop_toBottomOf="@id/gaurav"
+                        app:layout_constraintStart_toEndOf="@id/profile_image_2"
+                        android:layout_marginStart="12dp"/>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/jyotimoy_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                app:cardCornerRadius="24dp"
+                android:backgroundTint="@color/elevated_surfaces"
+                app:layout_constraintTop_toBottomOf="@id/gaurav_card"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="8dp"
+                style="?attr/materialCardViewFilledStyle">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/profile_image_3"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        app:srcCompat="@drawable/jyotimoy_kashyap"
+                        android:scaleType="centerCrop"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"/>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/jyotimoy"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="19sp"
+                        android:text="Jyotimoy Kashyap"
+                        app:fontFamily="@font/poppins_medium"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/profile_image_3"
+                        android:layout_marginTop="22dp"
+                        android:layout_marginStart="12dp"/>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:text="Android Developer | UI / UX"
+                        app:fontFamily="@font/poppins_light"
+                        app:layout_constraintTop_toBottomOf="@id/jyotimoy"
+                        app:layout_constraintStart_toEndOf="@id/profile_image_3"
+                        android:layout_marginStart="12dp"/>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+</androidx.core.widget.NestedScrollView>

@@ -22,7 +22,7 @@ private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 
-class RecordFragment : Fragment(), DialogResponse {
+class RecordFragment : Fragment(){
 
     private var param1: String? = null
     private var param2: String? = null
@@ -36,7 +36,6 @@ class RecordFragment : Fragment(), DialogResponse {
     private var encodedString: String? = null
     private var state: Boolean = false
 
-    private lateinit var confirmBottomSheet: BottomSheetFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,10 +81,6 @@ class RecordFragment : Fragment(), DialogResponse {
                     encodedString = recordViewModel.getAudioString()
                     Log.d("Prediction", "Encoded String: " + encodedString)
 
-//                    // open the dialog
-//                    confirmBottomSheet = BottomSheetFragment.newInstance(this@RecordFragment)
-//                    confirmBottomSheet.isCancelable = false
-//                    confirmBottomSheet.show(requireActivity().supportFragmentManager, "Dialog")
 
                     // enable the buttons
                     discardButton.isEnabled = true
@@ -130,19 +125,5 @@ class RecordFragment : Fragment(), DialogResponse {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    override fun onButtonClick(status: Boolean) {
-        if(status){
-            confirmBottomSheet.dismiss()
-            val action = RecordFragmentDirections.
-                    actionRecordFragmentToPredictionFragment(encodedString = encodedString!!)
-                    findNavController().navigate(action)
-        }else{
-            // close the dialog and delete the recording
-                confirmBottomSheet.dismiss()
-            recordViewModel.deleteRecording(requireContext())
-
-        }
     }
 }

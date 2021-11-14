@@ -89,5 +89,13 @@
             app:destination="@id/splashFragment"
             app:popUpTo="@id/settingsFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_settingsFragment_to_aboutUsFragment"
+            app:destination="@id/aboutUsFragment" />
     </dialog>
+    <fragment
+        android:id="@+id/aboutUsFragment"
+        android:name="com.ibmhack2021.coughit.ui.home.settings.AboutUsFragment"
+        android:label="fragment_about_us"
+        tools:layout="@layout/fragment_about_us" />
 </navigation>
