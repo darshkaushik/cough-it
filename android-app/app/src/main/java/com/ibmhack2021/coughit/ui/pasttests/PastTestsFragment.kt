@@ -6,14 +6,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.transition.MaterialFadeThrough
 import com.google.firebase.auth.FirebaseAuth
 import com.ibmhack2021.coughit.databinding.FragmentPastTestsBinding
 import com.ibmhack2021.coughit.databinding.FragmentRecordBinding
 import com.ibmhack2021.coughit.repository.Repository
 import com.ibmhack2021.coughit.util.Resource
+import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 import java.util.*
 
 
@@ -31,6 +35,9 @@ class PastTestsFragment : Fragment() {
 
     private var _binding: FragmentPastTestsBinding? = null
     private val binding get() = _binding!!
+
+    // adapter
+    private val pastTestAdapter : PastTestAdapter by lazy { PastTestAdapter(CustomDiffUtl()) }
 
     private lateinit var firebaseAuth: FirebaseAuth
 
@@ -63,9 +70,14 @@ class PastTestsFragment : Fragment() {
 
         binding.run {
 
-            // make the api call todo: remember to change it with current user url
-//            pastTestsViewModel.getPastsTests(firebaseAuth.currentUser?.email!!)
-            pastTestsViewModel.getPastsTests("gauravdas014@gmail.com")
+            // init the recycler view
+            pastTestsRecyclerView.adapter = pastTestAdapter
+            pastTestsRecyclerView.itemAnimator = SlideInUpAnimator()
+            pastTestsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+            // make the api call
+            pastTestsViewModel.getPastsTests(firebaseAuth.currentUser?.email!!)
+//            pastTestsViewModel.getPastsTests("gauravdas014@gmail.com")
 
             // observer
             pastTestsViewModel.pastTests.observe(viewLifecycleOwner, Observer {
@@ -73,6 +85,8 @@ class PastTestsFragment : Fragment() {
                     is Resource.Success ->{
                         it.data?.let {
                             Log.d("reports" , it.data.get(0).prediction)
+                            pastTestAdapter.submitList(it.data)
+                            pastTestProgress.hide()
                         }
                     }
                 }

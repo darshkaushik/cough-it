@@ -32,6 +32,7 @@
 
             </com.google.android.material.appbar.MaterialToolbar>
             <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/past_test_progress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
@@ -42,6 +43,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/past_tests_recycler_view"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
