@@ -42,6 +42,9 @@
         <action
             android:id="@+id/action_homeFragment_to_pastTestsFragment"
             app:destination="@id/pastTestsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/recordFragment"
@@ -73,4 +76,18 @@
         android:name="com.ibmhack2021.coughit.ui.pasttests.PastTestsFragment"
         android:label="fragment_past_tests"
         tools:layout="@layout/fragment_past_tests" />
+    <dialog
+        android:id="@+id/settingsFragment"
+        android:name="com.ibmhack2021.coughit.ui.home.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_splashFragment"
+            app:destination="@id/splashFragment"
+            app:popUpTo="@id/settingsFragment"
+            app:popUpToInclusive="true" />
+    </dialog>
 </navigation>

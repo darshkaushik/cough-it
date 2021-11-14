@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.google.android.material.transition.MaterialElevationScale
 import com.google.android.material.transition.MaterialFadeThrough
 import com.google.firebase.auth.FirebaseAuth
@@ -177,6 +178,15 @@ class HomeFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             // past tests fragment
             pastTests.setOnClickListener {
                 findNavController().navigate(R.id.action_homeFragment_to_pastTestsFragment)
+            }
+
+            Glide.with(this@HomeFragment)
+                .load(firebaseAuth.currentUser!!.photoUrl)
+                .into(accountIcon)
+
+            // account icon set up
+            accountIcon.setOnClickListener {
+                findNavController().navigate(R.id.action_homeFragment_to_settingsFragment)
             }
         }
 
