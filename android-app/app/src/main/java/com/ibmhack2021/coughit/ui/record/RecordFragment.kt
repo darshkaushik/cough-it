@@ -82,13 +82,32 @@ class RecordFragment : Fragment(), DialogResponse {
                     encodedString = recordViewModel.getAudioString()
                     Log.d("Prediction", "Encoded String: " + encodedString)
 
-                    // open the dialog
-                    confirmBottomSheet = BottomSheetFragment.newInstance(this@RecordFragment)
-                    confirmBottomSheet.isCancelable = false
-                    confirmBottomSheet.show(requireActivity().supportFragmentManager, "Dialog")
+//                    // open the dialog
+//                    confirmBottomSheet = BottomSheetFragment.newInstance(this@RecordFragment)
+//                    confirmBottomSheet.isCancelable = false
+//                    confirmBottomSheet.show(requireActivity().supportFragmentManager, "Dialog")
+
+                    // enable the buttons
+                    discardButton.isEnabled = true
+                    sendButton.isEnabled = true
 
                 }
             })
+
+            // discard button function
+            discardButton.setOnClickListener {
+                recordViewModel.deleteRecording(requireContext())
+                playButton.isEnabled = true
+                discardButton.isEnabled = false
+                sendButton.isEnabled = false
+            }
+
+            // send button function
+            sendButton.setOnClickListener {
+                val action = RecordFragmentDirections.
+                actionRecordFragmentToPredictionFragment(encodedString = encodedString!!)
+                findNavController().navigate(action)
+            }
         }
 
 

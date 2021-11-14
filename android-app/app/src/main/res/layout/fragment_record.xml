@@ -88,7 +88,6 @@
         app:cornerRadius="40dp"
         app:iconPadding="0dp"
         app:iconGravity="textStart"
-        app:backgroundTint="@color/orange_primary"
         app:iconTint="@color/surface_color"
         style="@style/Widget.Material3.Button.UnelevatedButton"
         app:icon="@drawable/ic_round_play_arrow_24"
@@ -97,6 +96,34 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.86"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/discard_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="?attr/materialButtonOutlinedStyle"
+        android:text="Discard"
+        android:enabled="false"
+        android:hapticFeedbackEnabled="true"
+        app:icon="@drawable/ic_round_delete_24"
+        app:layout_constraintEnd_toStartOf="@id/play_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/play_button"
+        app:layout_constraintBottom_toBottomOf="@id/play_button"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/send_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="?attr/materialButtonOutlinedStyle"
+        android:text="Send"
+        android:enabled="false"
+        android:hapticFeedbackEnabled="true"
+        app:icon="@drawable/ic_round_send_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/play_button"
+        app:layout_constraintTop_toTopOf="@id/play_button"
+        app:layout_constraintBottom_toBottomOf="@id/play_button"/>
 
 
 
