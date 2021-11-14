@@ -52,6 +52,16 @@
         app:layout_anchorGravity="bottom"
         tools:listitem="@layout/test_row_layout"/>
 
+    <TextView
+        android:id="@+id/no_data_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No Past Tests Summary"
+        android:layout_gravity="center"
+        android:fontFamily="@font/poppins"
+        android:textSize="16sp"
+        android:visibility="invisible"/>
+
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

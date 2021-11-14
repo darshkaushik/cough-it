@@ -77,15 +77,19 @@ class PastTestsFragment : Fragment() {
 
             // make the api call
             pastTestsViewModel.getPastsTests(firebaseAuth.currentUser?.email!!)
-//            pastTestsViewModel.getPastsTests("gauravdas014@gmail.com")
+//            pastTestsViewModel.getPastsTests("jyotimoykashyap123@gmail.com")
 
             // observer
             pastTestsViewModel.pastTests.observe(viewLifecycleOwner, Observer {
                 when(it){
                     is Resource.Success ->{
                         it.data?.let {
-                            Log.d("reports" , it.data.get(0).prediction)
-                            pastTestAdapter.submitList(it.data)
+                            if(it.data == null || it.data.isEmpty()){
+                                noDataText.visibility = View.VISIBLE
+                            }else{
+                                pastTestAdapter.submitList(it.data)
+                                noDataText.visibility = View.INVISIBLE
+                            }
                             pastTestProgress.hide()
                         }
                     }
