@@ -62,7 +62,7 @@ class HomeViewModel(val repository: Repository) : ViewModel() {
         // val array = arrayOf<Double>(elements)
         val series2 = LineGraphSeries(arrayOf<DataPoint>())
         for(i in array.indices){
-            series2.appendData(DataPoint((i).toDouble(), (array[i].prediction).toDouble()), true, 20)
+            series2.appendData(DataPoint((i).toDouble(), (array[i].prediction).toDouble().times(100)), true, 20)
             Log.d("homefragment", array[i].prediction + " Date stamp : " + array[i].date)
         }
         series.postValue(series2)

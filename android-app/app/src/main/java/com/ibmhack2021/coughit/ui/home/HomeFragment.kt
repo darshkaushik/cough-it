@@ -126,9 +126,20 @@ class HomeFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             val gridLabelRenderer = graphView.gridLabelRenderer
             gridLabelRenderer.gridColor = requireContext().getColor(R.color.body_text_color)
             gridLabelRenderer.gridStyle = GridLabelRenderer.GridStyle.HORIZONTAL
-            gridLabelRenderer.isVerticalLabelsVisible = false
+            gridLabelRenderer.isVerticalLabelsVisible = true
             gridLabelRenderer.isHighlightZeroLines = false
             gridLabelRenderer.isHorizontalLabelsVisible = false
+            gridLabelRenderer.verticalAxisTitle = "Percentage(%)"
+            gridLabelRenderer.numHorizontalLabels = 10
+            gridLabelRenderer.horizontalLabelsColor = requireContext().getColor(R.color.body_text_color)
+            gridLabelRenderer.verticalAxisTitleColor = requireContext().getColor(R.color.body_text_color)
+
+
+            graphView.viewport.isYAxisBoundsManual = true
+            graphView.viewport.setMaxY((100).toDouble())
+            graphView.viewport.setMinY((0).toDouble())
+            graphView.viewport.isScrollable = true
+
 
 
 
