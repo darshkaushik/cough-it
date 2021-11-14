@@ -4,4 +4,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="confirmation_message_string">Are you sure, you want to send this audio sample for prediction. Once send, cannot be reverted back. If you think, the audio sample is clear and satisfactory then please proceed</string>
     <string name="covid_guide">Stopping the spread starts with your, wear a mask, clean your hands, maintain safe distance, \n\nGet Vaccinated</string>
+    <string name="contribute_us">This feature will allow you to contribute audio samples to our database to make our model more efficient and robust. We will train our model on these datasets for keeping our model updated</string>
 </resources>

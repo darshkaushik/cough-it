@@ -199,6 +199,14 @@ class HomeFragment : Fragment(), EasyPermissions.PermissionCallbacks {
                 val intent = Intent(Intent.ACTION_VIEW, uri)
                 startActivity(intent)
             }
+
+            contribution.setOnClickListener {
+                Toast.makeText(
+                    requireContext(),
+                    "Coming Soon ...",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
         }
 
 

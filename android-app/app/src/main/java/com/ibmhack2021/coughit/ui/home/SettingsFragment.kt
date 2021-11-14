@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.transition.MaterialFadeThrough
 import com.google.firebase.auth.FirebaseAuth
 import com.ibmhack2021.coughit.R
@@ -64,13 +65,33 @@ class SettingsFragment : BottomSheetDialogFragment() {
 
             // sign out
             logout.setOnClickListener {
-                firebaseAuth.signOut()
-                findNavController().navigate(R.id.action_settingsFragment_to_splashFragment)
+                MaterialAlertDialogBuilder(requireContext())
+                    .setTitle("Sign Out")
+                    .setMessage("Are you sure you want to sign out ?")
+                    .setPositiveButton("Sign Out"){
+                            dialog, which ->
+                        firebaseAuth.signOut()
+                        findNavController().navigate(R.id.action_settingsFragment_to_splashFragment)
+                        dismiss()
+                    }
+                    .show()
             }
 
             // about us
             aboutUs.setOnClickListener {
                 findNavController().navigate(R.id.action_settingsFragment_to_aboutUsFragment)
+            }
+
+            // contribute us
+            contributeUs.setOnClickListener {
+                MaterialAlertDialogBuilder(requireContext())
+                    .setTitle("Contribute Us")
+                    .setMessage(resources.getString(R.string.contribute_us))
+                    .setPositiveButton("OK"){
+                        dialog, which ->
+                        dismiss()
+                    }
+                    .show()
             }
         }
 

@@ -13,6 +13,7 @@
         <item name="android:statusBarColor" tools:targetApi="l">@color/orange_surface</item>
         <!-- Customize your theme here. -->
 <!--        <item name="bottomSheetDialogTheme">@style/ThemeOverlay.App.BottomSheetDialog</item>-->
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.App.MaterialAlertDialog</item>
     </style>
 
     <style name="TextAppearance.MdcTypographyStyles.Headline1" parent="TextAppearance.MaterialComponents.Headline1">
@@ -106,5 +107,12 @@
     <style name="ShapeAppearance.App.LargeComponent" parent="ShapeAppearance.MaterialComponents.LargeComponent">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">24dp</item>
+    </style>
+
+    <style name="MaterialAlertDialog.App.Title.Text" parent="MaterialAlertDialog.Material3.Title.Text">
+        <item name="fontFamily">@font/poppins_medium</item>
+    </style>
+    <style name="MaterialAlertDialog.App.Message.Text" parent="MaterialAlertDialog.Material3.Body.Text">
+        <item name="fontFamily">@font/poppins_medium</item>
     </style>
 </resources>

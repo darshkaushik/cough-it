@@ -123,6 +123,25 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/contribute_us"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Contribute Us ( Coming Soon )"
+        app:icon="@drawable/ic_round_group_24"
+        android:textAlignment="textStart"
+        android:fontFamily="@font/poppins"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        app:iconPadding="12dp"
+        android:textSize="16sp"
+        app:iconSize="27dp"
+        android:textColor="@color/subtitle_text_color"
+        style="@style/Widget.Material3.Button.TextButton"
+        app:layout_constraintTop_toBottomOf="@id/about_us"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/logout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -137,7 +156,7 @@
         android:layout_marginBottom="20dp"
         style="@style/Widget.Material3.Button.TonalButton.Icon"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/about_us"
+        app:layout_constraintTop_toBottomOf="@id/contribute_us"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
