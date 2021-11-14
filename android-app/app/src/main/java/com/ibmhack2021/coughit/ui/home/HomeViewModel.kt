@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.android.material.progressindicator.LinearProgressIndicator
 import com.google.gson.internal.bind.util.ISO8601Utils
 import com.ibmhack2021.coughit.model.pasttests.PastTests
 import com.ibmhack2021.coughit.model.pasttests.Test
@@ -60,13 +61,14 @@ class HomeViewModel(val repository: Repository) : ViewModel() {
     // I will get just a simple array in retrofit call
     // I have to create a fun to convert this data points to something like this
 
-    fun convertToLineGraphSeries(array: List<Test>) = viewModelScope.launch {
+    fun convertToLineGraphSeries(array: List<Test>, linearProgressIndicator: LinearProgressIndicator) = viewModelScope.launch {
         // val array = arrayOf<Double>(elements)
         val series2 = LineGraphSeries(arrayOf<DataPoint>())
         for(i in array.indices){
             series2.appendData(DataPoint((i).toDouble(), (array[i].prediction).toDouble().times(100)), true, 20)
             Log.d("homefragment", array[i].prediction + " Date stamp : " + array[i].date)
         }
+        linearProgressIndicator.hide()
         series.postValue(series2)
     }
 

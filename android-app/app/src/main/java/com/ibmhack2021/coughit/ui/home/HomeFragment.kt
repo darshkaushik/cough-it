@@ -149,7 +149,7 @@ class HomeFragment : Fragment(), EasyPermissions.PermissionCallbacks {
                     is Resource.Success ->{
                         it.data?.let {
                             // I will get all the data
-                            homeViewModel.convertToLineGraphSeries(it.data)
+                            homeViewModel.convertToLineGraphSeries(it.data, progressLoad)
 
                             // here I have to set the text views
                             val latest = it.data[it.data.size - 1]
