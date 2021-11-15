@@ -1,6 +1,8 @@
 package com.ibmhack2021.coughit.ui.home
 
 import android.Manifest
+import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -9,12 +11,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.OvershootInterpolator
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.bumptech.glide.disklrucache.DiskLruCache
 import com.google.android.material.transition.MaterialElevationScale
 import com.google.android.material.transition.MaterialFadeThrough
 import com.google.firebase.auth.FirebaseAuth
@@ -207,6 +212,14 @@ class HomeFragment : Fragment(), EasyPermissions.PermissionCallbacks {
                     Toast.LENGTH_LONG
                 ).show()
             }
+
+            // animate the hand
+            val objectAnimator = ObjectAnimator.ofFloat(handSani, View.TRANSLATION_Y, 15.0f, 0.0f)
+            objectAnimator.duration = 1000
+            objectAnimator.interpolator = OvershootInterpolator()
+            objectAnimator.repeatCount = Animation.INFINITE
+            objectAnimator.repeatMode = ValueAnimator.REVERSE
+            objectAnimator.start()
         }
 
 

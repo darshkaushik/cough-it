@@ -302,21 +302,6 @@
                             android:textColor="@color/heading_text_color"
                             android:text="COVID-19 Guidelines"/>
 
-                        <com.airbnb.lottie.LottieAnimationView
-                            android:id="@+id/lottie"
-                            android:layout_width="130dp"
-                            android:layout_height="130dp"
-                            app:lottie_loop="true"
-                            app:lottie_autoPlay="true"
-                            app:lottie_rawRes="@raw/wear_mark"
-                            android:layout_marginEnd="12dp"
-                            android:layout_marginTop="12dp"
-                            android:layout_marginBottom="12dp"
-                            android:visibility="invisible"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"/>
-
                         <ImageView
                             android:id="@+id/hand_sani"
                             android:layout_width="130dp"
@@ -341,7 +326,7 @@
                             android:layout_marginEnd="24dp"
                             android:layout_marginBottom="12dp"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toStartOf="@id/lottie"
+                            app:layout_constraintEnd_toStartOf="@id/hand_sani"
                             app:layout_constraintTop_toBottomOf="@id/heading_covid"/>
 
                         <com.google.android.material.button.MaterialButton
