@@ -99,7 +99,9 @@ class HomeFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         handleFABOnScroll()
 
         // make the api call
-        homeViewModel.getPastsTests(firebaseAuth.currentUser?.email!!)
+        if(firebaseAuth.currentUser != null){
+            homeViewModel.getPastsTests(firebaseAuth.currentUser?.email!!)
+        }
 //        homeViewModel.getPastsTests("jyotimoykashyap123@gmail.com")
 
 
@@ -190,9 +192,12 @@ class HomeFragment : Fragment(), EasyPermissions.PermissionCallbacks {
                 findNavController().navigate(R.id.action_homeFragment_to_pastTestsFragment)
             }
 
-            Glide.with(this@HomeFragment)
-                .load(firebaseAuth.currentUser!!.photoUrl)
-                .into(accountIcon)
+            if(firebaseAuth.currentUser != null){
+                Glide.with(this@HomeFragment)
+                    .load(firebaseAuth.currentUser!!.photoUrl)
+                    .into(accountIcon)
+            }
+
 
             // account icon set up
             accountIcon.setOnClickListener {
