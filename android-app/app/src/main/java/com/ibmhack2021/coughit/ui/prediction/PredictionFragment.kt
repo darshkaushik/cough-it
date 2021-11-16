@@ -104,9 +104,9 @@ class PredictionFragment : Fragment() {
             binding.predictTextView.text = String.format("%.3f", it?.times(100))
 
             // here I have to set the categories
-            if(it?.times(100)!! > 90){
-                binding.categoryText.text = "you are at a high chance of being infected consider consulting a doctor immediately"
-            }else if(it?.times(100) > 40 && it.times(100) < 90){
+            if(it?.times(100)!! > 80){
+                binding.categoryText.text = "You are at a high chance of being infected consider consulting a doctor immediately"
+            }else if(it?.times(100) > 40 && it.times(100) < 80){
                 binding.categoryText.text = "You are at medium risk, try to avoid contact from others and keep regularly testing"
             }else{
                 binding.categoryText.text = "You are at low risk of infection. always wear a mask to avoid infection in future and keep testing"
