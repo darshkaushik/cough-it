@@ -10,6 +10,7 @@ import com.ibmhack2021.coughit.repository.Repository
 import com.ibmhack2021.coughit.util.Resource
 import kotlinx.coroutines.launch
 import retrofit2.Response
+import java.io.IOException
 import java.net.SocketTimeoutException
 import java.util.concurrent.TimeoutException
 
@@ -30,6 +31,8 @@ class PredictViewModel(val repository: Repository) : ViewModel() {
             predictedValue.postValue(handleRestResponse(response))
         }catch (e : SocketTimeoutException){
             Log.d("Prediction" , "timeout")
+        }catch (e : IOException){
+            Log.d("Prediction" , "Unexpected end of stream")
         }
 
     }
