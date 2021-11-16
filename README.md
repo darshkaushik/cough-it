@@ -27,12 +27,20 @@ AUC of ROC curve: 87.07% (on blind test set)
 
 
 ## What it does
-The working of **Cough It** is simple. User can simply install the app and tap to open it. Then, the app will ask for user permission for external storage and microphone. The user can then just tap the record button and it will take the user to a countdown timer like interface. Playing the play button will simply start recording a 7-seconds clip of cough sample of the user and upon completion it will navigate to the result screen for prediction the chances of the user having COVID-19
+The working of **Cough It** is simple. 
+* User can simply install the app 
+* Then Sign in with Google 
+* The user will see a home screen.
+* Click on the Test button to the bottom right corner.
+* Then record a 7 sec audio sample. 
+* And click on send button to get the prediction. 
+* After that the home screen will recent tests.
+* Users can also see the past taken tests by clicking on _Past Test_ button. 
 
 ## How we built it
 Our project is divided into three different modules --> 
 #### **ML Model** 
-Our machine learning model ( CNN architecture ) will be trained and deployed using the Sagemaker API which is apart of AWS to predict positive or negative infection from the pre-processed audio samples. The training data will also contain noisy and bad quality audio sample, so that it is robust for practical applications. 
+Our machine learning model ( CNN architecture ) will be trained and deployed using IBM Watson Machine Learning which is apart of IBM to predict positive or negative infection from the pre-processed audio samples. The training data will also contain noisy and bad quality audio sample, so that it is robust for practical applications. 
 
 #### **Android App**
 At first, we prepared the wireframe for the app and decided the architecture of the app which we will be using for our case. Then, we worked from the backend part first, so that we can structure our app in proper android MVVM architecture. We constructed all the models, Retrofit Instances and other necessary modules for code separation. 
@@ -42,7 +50,7 @@ The android app is built in Kotlin and is following MVVM architecture for scalab
 #### **Web Backend**
 The web backend is actually a Node.js application which is deployed on EC2 instance in AWS. We choose this type of architecture for our backend service because we wanted a more reliable connection between our ML model and our Node.js application. 
 
-At first, we created a backend server using Node.js and Express.js and deployed the Node.js server in AWS EC2 instance. The server then receives the audio file in Base64 encoded form from the android client through a POST request API call. After that, the file is getting converted to .wav file through a module in terminal through command. After successfully, generating the .wav file, we put that .wav file as argument in the pre-processor which is a python script. Then we call the AWS Sagemaker API to get the predictions and the Node.js application then sends the predictions back to the android counterpart to the endpoint. 
+At first, we created a backend server using Node.js and Express.js and deployed the Node.js server in AWS EC2 instance. The server then receives the audio file in Base64 encoded form from the android client through a POST request API call. After that, the file is getting converted to .wav file through a module in terminal through command. After successfully, generating the .wav file, we put that .wav file as argument in the pre-processor which is a python script. Then we call the IBM Watson Machine Learning to get the predictions and the Node.js application then sends the predictions back to the android counterpart to the endpoint. 
 
 ## Tech Stack
 <p align="center">
