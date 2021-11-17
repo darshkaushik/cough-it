@@ -32,7 +32,7 @@ The working of **Cough It** is simple.
 * Then Sign in with Google 
 * The user will see a home screen.
 * Click on the Test button to the bottom right corner.
-* Then record a 7 sec audio sample. 
+* Then record a 7 sec audio sample (due to limited free tier credits the WML deployment or Cloudant database services maybe exhausted, the waltkthrough video link can be referred in this case).
 * And click on send button to get the prediction. 
 * After that the home screen will recent tests.
 * Users can also see the past taken tests by clicking on _Past Test_ button. 
