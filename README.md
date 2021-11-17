@@ -52,6 +52,32 @@ The web backend is actually a Node.js application which is deployed on EC2 insta
 
 At first, we created a backend server using Node.js and Express.js and deployed the Node.js server in AWS EC2 instance. The server then receives the audio file in Base64 encoded form from the android client through a POST request API call. After that, the file is getting converted to .wav file through a module in terminal through command. After successfully, generating the .wav file, we put that .wav file as argument in the pre-processor which is a python script. Then we call the IBM Watson Machine Learning to get the predictions and the Node.js application then sends the predictions back to the android counterpart to the endpoint. 
 
+## How to Install
+
+### **Android Client**
+In order to run the code in your local machine, make sure you have installed Android Studio on your system and have configured it. 
+
+**Steps -**
+* Clone the repository. 
+* After successfully cloning our repository, open Android Studio.
+* Click on import project. 
+* From the list of directories (folders) select `android-app` folder from the repository directory. 
+* Let the android studio successfully sync gradle files and necessary requirements. 
+* After that you can deploy the app on your phone. 
+
+You can also install the APK directly from this Google Drive [link](https://drive.google.com/file/d/1vgLys1ykZtQpDF55EPVMiUqVM2CQD9Kx/view?usp=sharing).
+
+### **Web Client**
+In order to run the code in your local machine, make sure Node JS is installed on your system. 
+
+**Steps -**
+* Clone the repository. 
+* Open the repository directory in your terminal. 
+* Move to API directory by `cd API`
+* Run the command `npm install`
+* Start the server using `npm start server.js`
+
+
 ## Tech Stack
 <p align="center">
   <img src="./assets/tech_stack.png" />
