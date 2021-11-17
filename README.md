@@ -108,4 +108,4 @@ In order to run the code in your local machine, make sure Node JS is installed o
 </div>
 
 ## YouTube Prototype Demo
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/DRSvE45iHpU/0.jpg)](https://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID_HERE)
+[![ICough It prototype video](https://img.youtube.com/vi/DRSvE45iHpU/0.jpg)](https://www.youtube.com/watch?v=DRSvE45iHpU)
