@@ -58,15 +58,15 @@ At first, we created a backend server using Node.js and Express.js and deployed 
 </p>
 
 
-## Screenshots for the Android App
+## Screens of the Android App
 
 <br/>
 
-<!-- <div style="display: flex; justify-content: center">
-  <img width="250px" height="500px" src="./assets/home.jpg"/> &nbsp; &nbsp;
-  <img width="250px" height="500px" src="./assets/home_dark.jpg"/> &nbsp; &nbsp;
-  <img width="250px" height="500px" src="./assets/record.jpg"/><br/> <br/>
-  <img width="250px" height="500px" src="./assets/record_dark.jpg"/> &nbsp; &nbsp;
-  <img width="250px" height="500px" src="./assets/result.jpg"/>&nbsp; &nbsp;
-  <img width="250px" height="500px" src="./assets/result_dark.jpg"/>
-</div> -->
+<div style="display: flex; justify-content: center">
+  <img width="250px" height="500px" src="./assets/home.png"/> &nbsp; &nbsp;
+  <img width="250px" height="500px" src="./assets/settings.png"/> &nbsp; &nbsp;
+  <img width="250px" height="500px" src="./assets/past_tests.png"/><br/> <br/>
+  <img width="250px" height="500px" src="./assets/record.png"/> &nbsp; &nbsp;
+  <img width="250px" height="500px" src="./assets/prediction.png"/>&nbsp; &nbsp;
+  <img width="250px" height="500px" src="./assets/about_us.png"/>
+</div>
