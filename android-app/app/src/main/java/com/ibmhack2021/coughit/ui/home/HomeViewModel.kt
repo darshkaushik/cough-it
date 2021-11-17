@@ -64,12 +64,13 @@ class HomeViewModel(val repository: Repository) : ViewModel() {
     fun convertToLineGraphSeries(array: List<Test>?, linearProgressIndicator: LinearProgressIndicator) = viewModelScope.launch {
         // val array = arrayOf<Double>(elements)
         if(array != null){
-            val series2 = LineGraphSeries(arrayOf<DataPoint>())
-            for(i in array.indices){
-                series2.appendData(DataPoint((i).toDouble(), (array[i].prediction).toDouble().times(100)), true, 20)
-                Log.d("homefragment", array[i].prediction + " Date stamp : " + array[i].date)
+            // code optimization has been done but there are some issues with graph view library
+            val arrayOfDataPoint = Array<DataPoint>(array.size) { i ->
+                DataPoint((i).toDouble(), (array[i].prediction).toDouble().times(100))
             }
             linearProgressIndicator.hide()
+            val series2 = LineGraphSeries(arrayOfDataPoint)
+            series.value?.resetData(arrayOf())
             series.postValue(series2)
         }else{
             series.postValue(null)

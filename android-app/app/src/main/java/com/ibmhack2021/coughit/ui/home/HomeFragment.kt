@@ -113,7 +113,7 @@ class HomeFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             gridLabelRenderer.isHighlightZeroLines = false
             gridLabelRenderer.isHorizontalLabelsVisible = false
             gridLabelRenderer.verticalAxisTitle = "Percentage(%)"
-            gridLabelRenderer.numHorizontalLabels = 10
+//            gridLabelRenderer.numHorizontalLabels = 10
             gridLabelRenderer.horizontalLabelsColor = requireContext().getColor(R.color.body_text_color)
             gridLabelRenderer.verticalAxisTitleColor = requireContext().getColor(R.color.body_text_color)
 
@@ -121,7 +121,6 @@ class HomeFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             graphView.viewport.isYAxisBoundsManual = true
             graphView.viewport.setMaxY((100).toDouble())
             graphView.viewport.setMinY((0).toDouble())
-            graphView.viewport.isScrollable = true
 
 
 
@@ -156,6 +155,21 @@ class HomeFragment : Fragment(), EasyPermissions.PermissionCallbacks {
                     }
                 }
             })
+
+            // series to test
+//            val lineGraphSeries = LineGraphSeries<DataPoint>(
+//                arrayOf(
+//                    DataPoint((0).toDouble(), (70).toDouble()),
+//                    DataPoint((1).toDouble(), (16).toDouble()),
+//                    DataPoint((2).toDouble(), (50).toDouble()),
+//                    DataPoint((3).toDouble(), (25).toDouble()),
+//                    DataPoint((4).toDouble(), (30).toDouble()),
+//                    DataPoint((5).toDouble(), (12).toDouble()),
+//                    DataPoint((6).toDouble(), (10).toDouble())
+//                )
+//            )
+//
+//            graphView.addSeries(lineGraphSeries)
 
             homeViewModel.series.observe(viewLifecycleOwner, Observer {
                 if(it != null){
