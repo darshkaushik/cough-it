@@ -32,7 +32,7 @@ The working of **Cough It** is simple.
 * Then Sign in with Google 
 * The user will see a home screen.
 * Click on the Test button to the bottom right corner.
-* Then record a 7 sec audio sample. 
+* Then record a 7 sec audio sample (due to limited free tier credits the WML deployment or Cloudant database services maybe exhausted, the waltkthrough video link can be referred in this case).
 * And click on send button to get the prediction. 
 * After that the home screen will recent tests.
 * Users can also see the past taken tests by clicking on _Past Test_ button. 
@@ -51,6 +51,16 @@ The android app is built in Kotlin and is following MVVM architecture for scalab
 The web backend is actually a Node.js application which is deployed on EC2 instance in AWS. We choose this type of architecture for our backend service because we wanted a more reliable connection between our ML model and our Node.js application. 
 
 At first, we created a backend server using Node.js and Express.js and deployed the Node.js server in AWS EC2 instance. The server then receives the audio file in Base64 encoded form from the android client through a POST request API call. After that, the file is getting converted to .wav file through a module in terminal through command. After successfully, generating the .wav file, we put that .wav file as argument in the pre-processor which is a python script. Then we call the IBM Watson Machine Learning to get the predictions and the Node.js application then sends the predictions back to the android counterpart to the endpoint. 
+
+## Constraints 
+As we are using IBM Cloud lite plan for our database and ML model deployment. Our resources are limited as a student. We might run out of database storage for the Cloudant service.
+
+Also, our ML model is deployed on IBM cloud and hence, there might be issues if we run out of capacity per unit for our deployed model. 
+
+In such cases, please contact us at team.cought.it@gmail.com so that we can resume the services in one or both of the cases. Though we will keep monitoring all the usages and will make sure that our services are up and running. 
+
+You can always check out our walkthrough video for detailed flow of the app for the reference. 
+
 
 ## How to Install
 
@@ -96,3 +106,6 @@ In order to run the code in your local machine, make sure Node JS is installed o
   <img width="250px" height="500px" src="./assets/prediction.png"/>&nbsp; &nbsp;
   <img width="250px" height="500px" src="./assets/about_us.png"/>
 </div>
+
+## YouTube Prototype Demo
+[![ICough It prototype video](https://img.youtube.com/vi/DRSvE45iHpU/0.jpg)](https://www.youtube.com/watch?v=DRSvE45iHpU)
