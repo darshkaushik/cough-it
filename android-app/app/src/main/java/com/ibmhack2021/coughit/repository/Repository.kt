@@ -61,18 +61,18 @@ class Repository(context: Context) {
             MediaRecorder()
         }
 
-        mediaRecorder?.let {
-            it.setAudioSource(MediaRecorder.AudioSource.MIC)
-            it.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)
+        mediaRecorder?.apply {
+            setAudioSource(MediaRecorder.AudioSource.MIC)
+            setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)
 
             val root = context.getExternalFilesDir(null)
             val file = File((root?.absolutePath  + "/DataSamples"))
             if(!file.exists()) file.mkdirs()
             filename = root?.absolutePath + "/DataSamples" + (System.currentTimeMillis().toString()+ ".m4a" )
 
-            it.setOutputFile(filename)
-            it.setAudioEncoder(MediaRecorder.AudioEncoder.AAC)
-            it.setAudioSamplingRate(22050)
+            setOutputFile(filename)
+            setAudioEncoder(MediaRecorder.AudioEncoder.AAC)
+            setAudioSamplingRate(22050)
         }
 
 
