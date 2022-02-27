@@ -61,22 +61,27 @@ class Repository(context: Context) {
             MediaRecorder()
         }
 
-        mediaRecorder!!.setAudioSource(MediaRecorder.AudioSource.MIC)
-        mediaRecorder!!.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)
+        mediaRecorder?.let {
+            it.setAudioSource(MediaRecorder.AudioSource.MIC)
+            it.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)
 
-        val root = context.getExternalFilesDir(null)
-        val file = File((root?.absolutePath  + "/DataSamples"))
-        if(!file.exists()) file.mkdirs()
-        filename = root?.absolutePath + "/DataSamples" + (System.currentTimeMillis().toString()+ ".m4a" )
-        mediaRecorder!!.setOutputFile(filename)
-        mediaRecorder!!.setAudioEncoder(MediaRecorder.AudioEncoder.AAC)
-        mediaRecorder!!.setAudioSamplingRate(22050)
+            val root = context.getExternalFilesDir(null)
+            val file = File((root?.absolutePath  + "/DataSamples"))
+            if(!file.exists()) file.mkdirs()
+            filename = root?.absolutePath + "/DataSamples" + (System.currentTimeMillis().toString()+ ".m4a" )
+
+            it.setOutputFile(filename)
+            it.setAudioEncoder(MediaRecorder.AudioEncoder.AAC)
+            it.setAudioSamplingRate(22050)
+        }
 
 
         try {
-            mediaRecorder!!.prepare()
-            mediaRecorder!!.start()
-            state = true
+            mediaRecorder?.let {
+                it.prepare()
+                it.start()
+                state = true
+            }
 //            Toast.makeText(context, "Recording started !", Toast.LENGTH_SHORT).show()
         }catch (e : IllegalStateException){
             e.printStackTrace()
@@ -89,10 +94,11 @@ class Repository(context: Context) {
 
     fun stopRecording(context: Context){
         if(state){
-            mediaRecorder!!.stop()
-            mediaRecorder!!.release()
-            state = false
-            Toast.makeText(context, "File saved", Toast.LENGTH_SHORT).show()
+            mediaRecorder?.let {
+                it.stop()
+                it.release()
+                state = false
+            }
         }else{
             Toast.makeText(context, "You are not recording right now!", Toast.LENGTH_SHORT).show()
         }
@@ -114,9 +120,9 @@ class Repository(context: Context) {
 
     // get the file from the location and convert that into base64 string
     fun getFileFromFilePath(context: Context): String {
-        val file = File(filename!!)
+        val file = filename?.let { File(it) }
 
-        val byteArray = file.readBytes()
+        val byteArray = file?.readBytes()
 
         val encoding = android.util.Base64.encodeToString(byteArray, android.util.Base64.DEFAULT)
         Log.d("encoding" , "encoding : $encoding")

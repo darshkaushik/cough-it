@@ -71,9 +71,11 @@ class PastTestsFragment : Fragment() {
         binding.run {
 
             // init the recycler view
-            pastTestsRecyclerView.adapter = pastTestAdapter
-            pastTestsRecyclerView.itemAnimator = SlideInUpAnimator()
-            pastTestsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+            pastTestsRecyclerView.apply {
+                adapter = pastTestAdapter
+                itemAnimator = SlideInUpAnimator()
+                layoutManager = LinearLayoutManager(requireContext())
+            }
 
             // make the api call
             pastTestsViewModel.getPastsTests(firebaseAuth.currentUser?.email!!)

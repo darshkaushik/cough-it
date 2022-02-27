@@ -14,11 +14,14 @@ class PastTestAdapter(diffCallback: CustomDiffUtl) : ListAdapter<Test, PastTestA
     class MyViewHolder(val viewBinding: TestRowLayoutBinding) :
         RecyclerView.ViewHolder(viewBinding.root){
             fun bind(test: Test){
-                viewBinding.dateTextView.text = Utility.extractDate(test.date)
-                viewBinding.timeTextView.text = Utility.extractTime(test.date)
-                val resultText = String.format("%.2f" , test.prediction.toDouble()*100) + "%"
-                viewBinding.resultTextView.text = resultText
-                viewBinding.tagChip.text = if(test.prediction.toDouble()*100 < 70) "Safe" else "Unsafe"
+
+                viewBinding.run {
+                    dateTextView.text = Utility.extractDate(test.date)
+                    timeTextView.text = Utility.extractTime(test.date)
+                    val resultText = String.format("%.2f" , test.prediction.toDouble()*100) + "%"
+                    resultTextView.text = resultText
+                    tagChip.text = if(test.prediction.toDouble()*100 < 70) "Safe" else "Unsafe"
+                }
             }
 
         companion object{
